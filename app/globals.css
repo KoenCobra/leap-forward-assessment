@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Colors */
   --color-primary-blue-darkest: hsla(212, 73%, 21%, 1);
   --color-primary-blue-dark: hsla(205, 100%, 23%, 1);
   --color-blue-background: hsla(205, 87%, 36%, 1);
@@ -13,6 +14,9 @@
   --color-grey-light: hsla(210, 8%, 90%, 1);
 
   --color-secondary-yellow: hsla(53, 100%, 50%, 1);
+
+  /* Fonts */
+  --font-main: var(--font-flanders-art-sans);
 }
 
 body {
