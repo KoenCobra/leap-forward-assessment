@@ -1,6 +1,9 @@
+import { LEVEL_CARDS } from "@/lib/constants";
+import LevelCard from "./_components/LevelCard";
+
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="text-center">
         <h1 className="font-bold text-7xl">Kies je niveau!</h1>
         <p className="text-2xl mt-4">Welkom in Kanstad:</p>
@@ -8,6 +11,11 @@ export default function Home() {
           Een virtueel spel waarin je nieuwe kennis kan opdoen rond heel wat
           interessante beroepen. Begin er meteen aan. Aangeboden door VDAB.
         </p>
+      </div>
+      <div className="grid lg:grid-cols-3 gap-4 max-w-4xl mx-auto mt-20">
+        {LEVEL_CARDS.map((card) => (
+          <LevelCard key={card.title} {...card} />
+        ))}
       </div>
     </main>
   );
