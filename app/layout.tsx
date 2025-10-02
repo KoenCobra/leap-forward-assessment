@@ -5,7 +5,6 @@ import "./globals.css";
 const flandersArtSans = localFont({
   src: "./fonts/FlandersArtSans-Regular.woff",
   variable: "--font-flanders-art-sans",
-  weight: "400",
 });
 
 export const metadata: Metadata = {
