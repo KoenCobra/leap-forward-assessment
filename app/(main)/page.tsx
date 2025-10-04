@@ -12,7 +12,7 @@ export default function Home() {
           interessante beroepen. Begin er meteen aan. Aangeboden door VDAB.
         </p>
       </div>
-      <div className="grid lg:grid-cols-3 gap-4 max-w-4xl mx-auto mt-20">
+      <div className="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto mt-32">
         {LEVEL_CARDS.map((card) => (
           <LevelCard key={card.title} {...card} />
         ))}
