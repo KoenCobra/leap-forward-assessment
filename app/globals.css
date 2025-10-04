@@ -18,11 +18,12 @@
 
   /* Fonts */
   --font-main: var(--font-flanders-art-sans);
+
+  --background-image-main: url("/images/main-bg.jpg");
 }
 
 body {
   font-family: var(--font-main);
   background-color: var(--color-primary-blue-dark);
   color: var(--color-primary-white);
-  min-height: 100vh;
 }

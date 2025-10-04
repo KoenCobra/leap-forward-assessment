@@ -3,7 +3,7 @@ import LevelCard from "./_components/LevelCard";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4">
+    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-main bg-cover bg-center">
       <div className="text-center">
         <h1 className="font-bold text-7xl">Kies je niveau!</h1>
         <p className="text-2xl mt-4">Welkom in Kanstad:</p>
