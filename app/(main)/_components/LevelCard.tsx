@@ -17,7 +17,7 @@ const LevelCard = ({
     <div
       className={`bg-primary-white rounded-lg p-3 text-center border-b-12 ${borderColor} relative`}
     >
-      <h3 className="text-2xl font-bold text-primary-blue-darkest mt-12 border-b-2 border-b-blue-medium mb-4 w-min mx-auto">
+      <h3 className="text-2xl font-bold text-primary-blue-darkest mt-12 mb-4 pb-1 w-min mx-auto relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[160%] after:h-0.5 after:bg-blue-medium">
         {title}
       </h3>
       <p className="text-balance text-lg text-primary-blue-dark pb-6">
