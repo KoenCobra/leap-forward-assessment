@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const DescriptionCard = () => {
   return (
-    <div className="rounded-2xl flex-1 border border-blue-medium">
+    <div className="rounded-2xl flex-1">
       <div className="bg-printing-houses bg-black/40 bg-blend-overlay bg-cover bg-center h-[25%] rounded-t-lg p-2">
         <div className="flex items-center gap-2">
           <ContentElevated>
@@ -16,7 +16,7 @@ const DescriptionCard = () => {
           <div className="flex-1">
             <ContentElevated>
               <div className="pl-1 py-1 pr-4.5 flex items-center gap-1.5 w-full">
-                <div className="h-7 rounded-sm bg-primary-blue-dark flex-1"></div>
+                <div className="h-7 rounded-sm bg-blue-background flex-1"></div>
                 <span className="text-md font-bold">Level 2 / 8</span>
               </div>
             </ContentElevated>
