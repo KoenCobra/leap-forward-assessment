@@ -19,7 +19,9 @@
   /* Fonts */
   --font-main: var(--font-flanders-art-sans);
 
+  /* Background Images */
   --background-image-main: url("/images/main-bg.jpg");
+  --background-image-printing-houses: url("/images/printing-house.jpg");
 }
 
 body {
