@@ -1,6 +1,7 @@
 import ContentElevated from "@/components/ContentElevated";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LevelCounter from "./LevelCounter";
 
 const DescriptionCard = () => {
   return (
@@ -16,7 +17,9 @@ const DescriptionCard = () => {
           <div className="flex-1">
             <ContentElevated>
               <div className="pl-1 py-1 pr-4.5 flex items-center gap-1.5 w-full">
-                <div className="h-7 rounded-sm bg-blue-background flex-1"></div>
+                <div className="h-7 rounded-sm bg-blue-background flex-1">
+                  <LevelCounter />
+                </div>
                 <span className="text-md font-bold">Level 2 / 8</span>
               </div>
             </ContentElevated>
