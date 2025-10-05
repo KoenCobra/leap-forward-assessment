@@ -15,7 +15,10 @@ const DescriptionCard = () => {
           </ContentElevated>
           <div className="flex-1">
             <ContentElevated>
-              <span className="text-md font-bold">Level 2 / 8</span>
+              <div className="pl-1 py-1 pr-4.5 flex items-center gap-1.5 w-full">
+                <div className="h-7 rounded-sm bg-primary-blue-dark flex-1"></div>
+                <span className="text-md font-bold">Level 2 / 8</span>
+              </div>
             </ContentElevated>
           </div>
         </div>
