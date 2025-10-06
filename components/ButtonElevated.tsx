@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -10,11 +11,15 @@ interface ButtonElevatedProps {
 const ButtonElevated = ({ icon, text, iconClassName }: ButtonElevatedProps) => {
   return (
     <>
-      <button>
+      <button className="p-3 rounded-md bg-primary-blue-darkest text-center cursor-pointer">
         <FontAwesomeIcon
           icon={icon && icon}
-          className={iconClassName}
-        ></FontAwesomeIcon>
+          className={cn(iconClassName, "text-xl")}
+          style={{
+            strokeWidth: 30,
+            stroke: "currentColor",
+          }}
+        />
         <span>{text}</span>
       </button>
     </>
