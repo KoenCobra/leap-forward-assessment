@@ -11,12 +11,12 @@ interface ButtonElevatedProps {
 const ButtonElevated = ({ icon, text, iconClassName }: ButtonElevatedProps) => {
   return (
     <>
-      <div className="relative z-1">
+      <div className="relative flex items-center z-1">
         <button
           className="relative p-3 rounded-md bg-primary-blue-dark text-center cursor-pointer
-          grid place-items-center
-        after:content-[''] after:absolute after:inset-0 after:rounded-md  
-      after:translate-y-1 after:bg-primary-blue-darkest after:-z-1"
+          flex items-center justify-center
+          after:content-[''] after:absolute after:inset-0 after:rounded-md  
+          after:translate-y-1 after:bg-primary-blue-darkest after:-z-1 h-full"
         >
           <FontAwesomeIcon
             icon={icon && icon}
@@ -26,7 +26,7 @@ const ButtonElevated = ({ icon, text, iconClassName }: ButtonElevatedProps) => {
               stroke: "currentColor",
             }}
           />
-          <span>{text}</span>
+          <span className="font-bold">{text}</span>
         </button>
       </div>
     </>

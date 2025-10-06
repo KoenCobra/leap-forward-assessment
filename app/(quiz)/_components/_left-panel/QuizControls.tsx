@@ -1,5 +1,6 @@
 import ButtonElevated from "@/components/ButtonElevated";
 import {
+  faMap,
   faQuestion,
   faRotateRight,
   faVolumeXmark,
@@ -11,6 +12,11 @@ const QuizControls = () => {
       <ButtonElevated icon={faQuestion} />
       <ButtonElevated icon={faRotateRight} />
       <ButtonElevated icon={faVolumeXmark} />
+      <ButtonElevated
+        icon={faMap}
+        iconClassName="text-lg"
+        text="Naar de kaart"
+      />
     </div>
   );
 };
