@@ -1,5 +1,5 @@
-import DescriptionAndQuizControls from "../_components/DescriptionAndControls";
-import QuestionsAndAnswers from "../_components/QuestionsAndAnswers";
+import DescriptionAndQuizControls from "../_components/_left-panel/DescriptionAndControls";
+import QuestionsAndAnswers from "../_components/_right_panel/QuestionsAndAnswers";
 
 const page = () => {
   return (
