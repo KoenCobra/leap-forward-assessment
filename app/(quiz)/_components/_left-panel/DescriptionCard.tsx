@@ -39,7 +39,17 @@ const DescriptionCard = () => {
            absolute bottom-[-20%] left-1/2 -translate-x-1/2 shadow-2xl"
         />
       </div>
-      <div className="bg-primary-white rounded-b-lg p-4 h-full"></div>
+      <div className="bg-primary-white rounded-b-lg p-4 h-full text-center">
+        <h2 className="text-2xl font-bold text-primary-blue-dark mt-8 pb-3.5 border-b-2 border-blue-medium w-fit mx-auto">
+          Drukkerij
+        </h2>
+        <p className="text-primary-blue-dark font-light leading-5.5 mt-4 text-balance max-w-2xl mx-auto">
+          Je moet je goed bewust zijn van wat jij allemaal moet doen. Als
+          drukafwerker heb je een heel uiteenlopend takenpakket. Sommige van
+          onderstaande taken behoren echter niet tot het takenpakket, stop er
+          snel mee voor je baas het ziet!
+        </p>
+      </div>
     </div>
   );
 };
