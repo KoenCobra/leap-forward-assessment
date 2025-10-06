@@ -1,12 +1,13 @@
 import ContentElevated from "@/components/ContentElevated";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import LevelCounter from "./LevelCounter";
 
 const DescriptionCard = () => {
   return (
-    <div className="rounded-2xl flex-1">
-      <div className="bg-printing-houses bg-black/40 bg-blend-overlay bg-cover bg-center h-[25%] rounded-t-lg p-2">
+    <div className="rounded-2xl flex-1 flex flex-col">
+      <div className="bg-printing-houses bg-primary-blue-darkest/60 bg-blend-overlay bg-cover bg-center h-[31%] rounded-t-lg p-2 relative">
         <div className="flex items-center gap-2">
           <ContentElevated>
             <div className="px-3 py-1.5 flex items-center gap-2">
@@ -25,7 +26,16 @@ const DescriptionCard = () => {
             </ContentElevated>
           </div>
         </div>
+        <Image
+          src="/images/manager.png"
+          alt="manager"
+          width={135}
+          height={135}
+          className="border-4 border-primary-white bg-primary-white rounded-full
+           absolute bottom-[-20%] left-1/2 -translate-x-1/2 shadow-2xl"
+        />
       </div>
+      <div className="bg-primary-white rounded-b-lg p-4 h-full"></div>
     </div>
   );
 };
