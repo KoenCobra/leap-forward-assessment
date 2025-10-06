@@ -15,6 +15,7 @@
   --color-grey-light: hsla(210, 8%, 90%, 1);
 
   --color-secondary-yellow: hsla(53, 100%, 50%, 1);
+  --color-level-background-yellow: hsla(53, 84%, 47%, 1);
 
   /* Fonts */
   --font-main: var(--font-flanders-art-sans);

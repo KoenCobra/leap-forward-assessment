@@ -1,9 +1,7 @@
-import Image from "next/image";
-
 const LevelCounter = () => {
   return (
-    <div className="rounded-sm bg-secondary-yellow h-full w-fit overflow-hidden">
-      <Image src="/images/level.svg" alt="level" width={15} height={40} />
+    <div className="rounded-sm bg-secondary-yellow w-fit h-full overflow-hidden flex items-center gap-3 px-1">
+      <div className="h-full w-2 rotate-25 scale-120 bg-level-background-yellow"></div>
     </div>
   );
 };
