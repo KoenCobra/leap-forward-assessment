@@ -7,7 +7,10 @@ import LevelCounter from "./LevelCounter";
 const DescriptionCard = () => {
   return (
     <div className="rounded-2xl flex-1 flex flex-col">
-      <div className="bg-printing-houses bg-primary-blue-darkest/60 bg-blend-overlay bg-cover bg-center h-[31%] rounded-t-lg p-2 relative">
+      <div
+        className="bg-printing-houses bg-primary-blue-darkest/60 bg-blend-overlay
+       bg-cover bg-center h-40 lg:h-[31%] rounded-t-lg p-2 relative"
+      >
         <div className="flex items-center gap-2">
           <ContentElevated>
             <div className="px-3 py-1.5 flex items-center gap-2">
@@ -31,7 +34,8 @@ const DescriptionCard = () => {
           alt="manager"
           width={135}
           height={135}
-          className="border-4 border-primary-white bg-primary-white rounded-full
+          className="w-[clamp(100px,15vh,135px)] h-[clamp(100px,15vh,135px)] border-4
+           border-primary-white bg-primary-white rounded-full
            absolute bottom-[-20%] left-1/2 -translate-x-1/2 shadow-2xl"
         />
       </div>

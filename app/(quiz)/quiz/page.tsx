@@ -3,7 +3,7 @@ import QuestionsAndAnswers from "../_components/_right_panel/QuestionsAndAnswers
 
 const page = () => {
   return (
-    <div className="min-h-screen grid grid-cols-[23%_1fr] gap-4 p-6">
+    <div className="min-h-screen lg:grid lg:grid-cols-[30%_1fr] gap-4 p-6">
       <DescriptionAndQuizControls />
       <QuestionsAndAnswers />
     </div>
