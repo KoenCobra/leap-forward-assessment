@@ -28,14 +28,13 @@ const LevelCard = ({
     >
       <Link href="/quiz">
         <h3
-          className={cn(
-            "text-2xl font-bold text-primary-blue-darkest",
-            "mt-12 mb-4 pb-1 w-min mx-auto",
-            "relative",
-            "after:content-[''] after:absolute after:bottom-0",
-            "after:left-1/2 after:-translate-x-1/2 after:w-[160%] after:h-0.5 after:bg-blue-medium",
-            "group-hover:text-blue-medium transition-all duration-300"
-          )}
+          className="
+            text-2xl font-bold text-primary-blue-darkest
+            mt-12 mb-4 pb-1 w-min mx-auto
+            relative
+            after:content-[''] after:absolute after:bottom-0
+            after:left-1/2 after:-translate-x-1/2 after:w-[160%] after:h-0.5 after:bg-blue-medium
+            group-hover:text-blue-medium transition-all duration-300"
         >
           {title}
         </h3>
@@ -43,20 +42,18 @@ const LevelCard = ({
           {description}
         </p>
         <div
-          className={cn(
-            "absolute top-[-30%] right-[50%] transform translate-x-[50%]",
-            "rounded-full bg-primary-white p-3 shadow-xl"
-          )}
+          className="
+            absolute top-[-30%] right-[50%] transform translate-x-[50%]
+            rounded-full bg-primary-white p-3 shadow-xl"
         >
           <Image
             src={image}
             alt="profile"
             width={100}
             height={100}
-            className={cn(
-              "group-hover:scale-105 group-hover:translate-y-[-5px]",
-              "transition-all duration-300"
-            )}
+            className="
+              group-hover:scale-105 group-hover:translate-y-[-5px]
+              transition-all duration-300"
           />
         </div>
       </Link>

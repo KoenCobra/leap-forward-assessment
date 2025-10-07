@@ -22,7 +22,7 @@ const ButtonElevated = ({
       <button
         className={cn(
           "relative p-3 rounded-md text-center cursor-pointer",
-          "flex items-center justify-center",
+          "flex items-center justify-center w-full",
           "after:content-[''] after:absolute after:inset-0 after:rounded-md",
           "after:translate-y-1 after:-z-1",
           afterColor,
