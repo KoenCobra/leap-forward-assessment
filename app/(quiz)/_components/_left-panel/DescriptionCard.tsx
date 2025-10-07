@@ -10,7 +10,7 @@ const DescriptionCard = () => {
       <div
         className="
           bg-printing-houses bg-primary-blue-darkest/60 bg-blend-overlay
-          bg-cover bg-center h-40 lg:h-[31%]
+          bg-cover bg-center h-40 xl:h-[31%]
           rounded-t-lg p-2 relative
         "
       >
