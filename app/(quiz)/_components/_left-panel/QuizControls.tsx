@@ -15,9 +15,8 @@ const QuizControls = () => {
       <div className="flex-1">
         <ButtonElevated
           icon={faMap}
-          addedIconClasses="mr-2"
           text="Naar de kaart"
-          addedButtonClasses="bg-secondary-yellow text-primary-blue-darkest flex-1 w-full"
+          addedButtonClasses="bg-secondary-yellow text-primary-blue-darkest w-full"
           afterColor="after:bg-yellow-darkest"
         />
       </div>

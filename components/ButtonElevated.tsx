@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface ButtonElevatedProps {
   icon: IconProp;
   text?: string;
-  addedIconClasses?: string;
   addedButtonClasses?: string;
   afterColor?: string;
 }
@@ -13,12 +12,11 @@ interface ButtonElevatedProps {
 const ButtonElevated = ({
   icon,
   text,
-  addedIconClasses,
   addedButtonClasses = "bg-primary-blue-dark",
   afterColor = "after:bg-primary-blue-darkest",
 }: ButtonElevatedProps) => {
   return (
-    <div className="relative z-1 h-full">
+    <div className="relative z-1">
       <button
         className={cn(
           "relative p-3 rounded-md text-center cursor-pointer",
@@ -31,10 +29,12 @@ const ButtonElevated = ({
       >
         <FontAwesomeIcon
           icon={icon && icon}
-          className={cn("text-xl", addedIconClasses)}
+          className={text && "mr-2"}
           style={{
-            strokeWidth: 30,
+            strokeWidth: 20,
             stroke: "currentColor",
+            height: 24,
+            width: 24,
           }}
         />
         <span className="font-bold">{text}</span>
