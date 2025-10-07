@@ -10,7 +10,7 @@ const DescriptionCard = () => {
       <div
         className="
           bg-printing-houses bg-primary-blue-darkest/60 bg-blend-overlay
-          bg-cover bg-center h-40 xl:h-[31%]
+          bg-cover bg-center h-48 xl:h-[40%]
           rounded-t-lg p-2 relative
         "
       >
@@ -40,7 +40,7 @@ const DescriptionCard = () => {
           className="
             w-[clamp(100px,15vh,135px)] h-[clamp(100px,15vh,135px)]
             border-4 border-primary-white bg-primary-white rounded-full
-            absolute bottom-[-20%] left-1/2 -translate-x-1/2 shadow-2xl
+            absolute bottom-[-10%] left-1/2 -translate-x-1/2 shadow-2xl
           "
         />
       </div>
@@ -57,7 +57,7 @@ const DescriptionCard = () => {
         <p
           className="
             text-primary-blue-dark font-light leading-5.5
-            mt-4 text-balance max-w-2xl mx-auto
+            mt-4 text-balance max-w-2xl mx-auto pb-6
           "
         >
           Je moet je goed bewust zijn van wat jij allemaal moet doen. Als
