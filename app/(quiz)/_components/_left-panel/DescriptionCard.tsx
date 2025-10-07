@@ -1,8 +1,6 @@
-import ContentElevated from "@/components/ContentElevated";
-import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import LevelCounter from "./LevelCounter";
+import GlobalQuizTimer from "./GlobalQuizTimer";
+import LevelProgress from "./LevelProgress";
 
 const DescriptionCard = () => {
   return (
@@ -15,22 +13,8 @@ const DescriptionCard = () => {
         "
       >
         <div className="flex items-center gap-2">
-          <ContentElevated>
-            <div className="px-3 py-1.5 flex items-center gap-2">
-              <FontAwesomeIcon icon={faStopwatch} className="text-sm" />
-              <span className="font-md font-bold">42:32</span>
-            </div>
-          </ContentElevated>
-          <div className="flex-1">
-            <ContentElevated>
-              <div className="pl-1 py-1 pr-4.5 flex items-center gap-1.5 w-full">
-                <div className="h-7 rounded-sm bg-blue-background flex-1">
-                  <LevelCounter />
-                </div>
-                <span className="text-md font-bold">Level 2 / 8</span>
-              </div>
-            </ContentElevated>
-          </div>
+          <GlobalQuizTimer />
+          <LevelProgress />
         </div>
         <Image
           src="/images/manager.png"
