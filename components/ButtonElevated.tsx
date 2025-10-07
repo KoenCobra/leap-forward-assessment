@@ -9,6 +9,7 @@ interface ButtonElevatedProps {
   afterColor?: string;
   iconSize?: number;
   isDisabled?: boolean;
+  onClick?: () => void;
 }
 
 const ButtonElevated = ({
@@ -18,6 +19,7 @@ const ButtonElevated = ({
   afterColor = "after:bg-primary-blue-darkest",
   iconSize = 24,
   isDisabled = false,
+  onClick,
 }: ButtonElevatedProps) => {
   return (
     <div className="relative z-1">
@@ -31,6 +33,7 @@ const ButtonElevated = ({
           addedButtonClasses
         )}
         disabled={isDisabled}
+        onClick={onClick}
       >
         {icon && (
           <FontAwesomeIcon

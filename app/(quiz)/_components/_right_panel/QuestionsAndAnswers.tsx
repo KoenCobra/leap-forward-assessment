@@ -4,12 +4,22 @@ import ButtonElevated from "@/components/ButtonElevated";
 import { useState } from "react";
 import { useQuestions } from "../../_hooks/useQuestions";
 import Answers from "./Answers";
+import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
 import QuestionTimer from "./QuestionTimer";
+import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
+
+  if (isLoadingQuestions) {
+    return <QuestionLoadingSkeleton />;
+  }
+
+  if (!isLoadingQuestions && errorQuestions) {
+    return <QuestionsErrorState />;
+  }
 
   return (
     <div className="bg-blue-background rounded-2xl p-4">
