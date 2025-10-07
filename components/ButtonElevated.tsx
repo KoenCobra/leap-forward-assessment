@@ -7,6 +7,7 @@ interface ButtonElevatedProps {
   text?: string;
   addedButtonClasses?: string;
   afterColor?: string;
+  iconSize?: number;
 }
 
 const ButtonElevated = ({
@@ -14,6 +15,7 @@ const ButtonElevated = ({
   text,
   addedButtonClasses = "bg-primary-blue-dark",
   afterColor = "after:bg-primary-blue-darkest",
+  iconSize = 24,
 }: ButtonElevatedProps) => {
   return (
     <div className="relative z-1">
@@ -33,8 +35,8 @@ const ButtonElevated = ({
           style={{
             strokeWidth: 20,
             stroke: "currentColor",
-            height: 24,
-            width: 24,
+            height: iconSize,
+            width: iconSize,
           }}
         />
         <span className="font-bold">{text}</span>

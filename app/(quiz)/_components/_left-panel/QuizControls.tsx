@@ -18,6 +18,7 @@ const QuizControls = () => {
           text="Naar de kaart"
           addedButtonClasses="bg-secondary-yellow text-primary-blue-darkest w-full"
           afterColor="after:bg-yellow-darkest"
+          iconSize={20}
         />
       </div>
     </div>
