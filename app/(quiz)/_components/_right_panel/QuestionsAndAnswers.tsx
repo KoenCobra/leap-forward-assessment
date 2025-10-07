@@ -25,10 +25,13 @@ const QuestionsAndAnswers = () => {
     <div className="bg-blue-background rounded-2xl p-4">
       <div className="bg-primary-blue-darkest h-full rounded-2xl pt-2 px-12 pb-15.5">
         <QuestionTimer />
+
         <h2 className="font-bold text-center text-2xl mt-4.5">
           {questions?.[currentQuestionIndex]?.question}
         </h2>
+
         <Answers />
+
         <ButtonElevated
           isDisabled
           text="Klaar!"

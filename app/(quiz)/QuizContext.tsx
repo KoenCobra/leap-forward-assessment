@@ -1,8 +1,11 @@
 "use client";
 import { createContext, useCallback, useMemo, useState } from "react";
+import { Answer } from "./types";
 
 interface QuizContextProps {
   index: number;
+  selectedAnswers: Answer[];
+  handleSetSelectedAnswers: (answer: Answer) => void;
 }
 
 const QuizContext = createContext<QuizContextProps | null>(null);
@@ -11,12 +14,31 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [index, setIndex] = useState<number>(0);
+  const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
 
   const handleSetIndex = useCallback(() => setIndex((prev) => prev + 1), []);
 
+  const handleSetSelectedAnswers = useCallback(
+    (answer: Answer) => {
+      if (selectedAnswers.includes(answer)) {
+        setSelectedAnswers(
+          selectedAnswers.filter((selectedAnswer) => selectedAnswer !== answer)
+        );
+        return;
+      }
+      setSelectedAnswers([...selectedAnswers, answer]);
+    },
+    [selectedAnswers]
+  );
+
   const contextValue = useMemo<QuizContextProps>(
-    () => ({ index, handleSetIndex }),
-    [index, handleSetIndex]
+    () => ({
+      index,
+      handleSetIndex,
+      selectedAnswers,
+      handleSetSelectedAnswers,
+    }),
+    [index, handleSetIndex, selectedAnswers, handleSetSelectedAnswers]
   );
 
   return (
