@@ -1,8 +1,15 @@
 "use client";
 
 import ButtonElevated from "@/components/ButtonElevated";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useQuestions } from "../../_hooks/useQuestions";
+import useQuizContext from "../../_hooks/useQuizContext";
 import Answers from "./Answers";
 import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
 import QuestionTimer from "./QuestionTimer";
@@ -10,7 +17,7 @@ import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
+  const { hasSelectedAnswers } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
 
   if (isLoadingQuestions) {
@@ -32,12 +39,25 @@ const QuestionsAndAnswers = () => {
 
         <Answers />
 
-        <ButtonElevated
-          isDisabled
-          text="Klaar!"
-          addedButtonClasses="mt-7.5 bg-grey-light text-primary-blue-dark w-3/5 mx-auto"
-          afterColor="after:bg-grey-dark"
-        />
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <ButtonElevated
+              isDisabled={!hasSelectedAnswers}
+              text="Klaar!"
+              addedButtonClasses={cn(
+                "mt-7.5 bg-grey-light text-primary-blue-dark w-3/5 mx-auto",
+                hasSelectedAnswers
+                  ? "bg-secondary-yellow after:bg-yellow-darkest"
+                  : "cursor-not-allowed"
+              )}
+              afterColor="after:bg-grey-dark"
+            />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Selecteer minstens één antwoord</p>
+          </TooltipContent>
+        </Tooltip>
+
         <ButtonElevated
           text="Geef me een tip..."
           addedButtonClasses="

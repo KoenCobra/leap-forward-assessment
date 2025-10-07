@@ -4,7 +4,9 @@ import { Answer } from "./types";
 
 interface QuizContextProps {
   index: number;
+  handleSetIndex: () => void;
   selectedAnswers: Answer[];
+  hasSelectedAnswers: boolean;
   handleSetSelectedAnswers: (answer: Answer) => void;
 }
 
@@ -17,6 +19,8 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
 
   const handleSetIndex = useCallback(() => setIndex((prev) => prev + 1), []);
+
+  const hasSelectedAnswers = selectedAnswers.length > 0;
 
   const handleSetSelectedAnswers = useCallback(
     (answer: Answer) => {
@@ -36,9 +40,16 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
       index,
       handleSetIndex,
       selectedAnswers,
+      hasSelectedAnswers,
       handleSetSelectedAnswers,
     }),
-    [index, handleSetIndex, selectedAnswers, handleSetSelectedAnswers]
+    [
+      index,
+      handleSetIndex,
+      selectedAnswers,
+      handleSetSelectedAnswers,
+      hasSelectedAnswers,
+    ]
   );
 
   return (
