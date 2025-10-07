@@ -5,31 +5,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface ButtonElevatedProps {
   icon: IconProp;
   text?: string;
-  iconClassName?: string;
+  addedIconClasses?: string;
+  addedButtonClasses?: string;
+  afterColor?: string;
 }
 
-const ButtonElevated = ({ icon, text, iconClassName }: ButtonElevatedProps) => {
+const ButtonElevated = ({
+  icon,
+  text,
+  addedIconClasses,
+  addedButtonClasses = "bg-primary-blue-dark",
+  afterColor = "after:bg-primary-blue-darkest",
+}: ButtonElevatedProps) => {
   return (
-    <>
-      <div className="relative flex items-center z-1">
-        <button
-          className="relative p-3 rounded-md bg-primary-blue-dark text-center cursor-pointer
+    <div className="relative z-1">
+      <button
+        className={`m-0 p-0relative p-3 rounded-md text-center cursor-pointer
           flex items-center justify-center
           after:content-[''] after:absolute after:inset-0 after:rounded-md  
-          after:translate-y-1 after:bg-primary-blue-darkest after:-z-1 h-full"
-        >
-          <FontAwesomeIcon
-            icon={icon && icon}
-            className={cn(iconClassName, "text-xl")}
-            style={{
-              strokeWidth: 30,
-              stroke: "currentColor",
-            }}
-          />
-          <span className="font-bold">{text}</span>
-        </button>
-      </div>
-    </>
+          after:translate-y-1 ${afterColor} after:-z-1 h-full ${addedButtonClasses}`}
+      >
+        <FontAwesomeIcon
+          icon={icon && icon}
+          className={cn(addedIconClasses, "text-xl")}
+          style={{
+            strokeWidth: 30,
+            stroke: "currentColor",
+          }}
+        />
+        <span className="font-bold">{text}</span>
+      </button>
+    </div>
   );
 };
 
