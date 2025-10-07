@@ -20,14 +20,18 @@ const ButtonElevated = ({
   return (
     <div className="relative z-1 h-full">
       <button
-        className={`${addedButtonClasses} relative p-3 rounded-md text-center cursor-pointer
-          flex items-center justify-center
-          after:content-[''] after:absolute after:inset-0 after:rounded-md  
-          after:translate-y-1 ${afterColor} after:-z-1`}
+        className={cn(
+          "relative p-3 rounded-md text-center cursor-pointer",
+          "flex items-center justify-center",
+          "after:content-[''] after:absolute after:inset-0 after:rounded-md",
+          "after:translate-y-1 after:-z-1",
+          afterColor,
+          addedButtonClasses
+        )}
       >
         <FontAwesomeIcon
           icon={icon && icon}
-          className={cn(addedIconClasses, "text-xl")}
+          className={cn("text-xl", addedIconClasses)}
           style={{
             strokeWidth: 30,
             stroke: "currentColor",
