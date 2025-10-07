@@ -3,11 +3,12 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface ButtonElevatedProps {
-  icon: IconProp;
+  icon?: IconProp;
   text?: string;
   addedButtonClasses?: string;
   afterColor?: string;
   iconSize?: number;
+  isDisabled?: boolean;
 }
 
 const ButtonElevated = ({
@@ -16,6 +17,7 @@ const ButtonElevated = ({
   addedButtonClasses = "bg-primary-blue-dark",
   afterColor = "after:bg-primary-blue-darkest",
   iconSize = 24,
+  isDisabled = false,
 }: ButtonElevatedProps) => {
   return (
     <div className="relative z-1">
@@ -28,17 +30,20 @@ const ButtonElevated = ({
           afterColor,
           addedButtonClasses
         )}
+        disabled={isDisabled}
       >
-        <FontAwesomeIcon
-          icon={icon && icon}
-          className={text && "mr-2"}
-          style={{
-            strokeWidth: 20,
-            stroke: "currentColor",
-            height: iconSize,
-            width: iconSize,
-          }}
-        />
+        {icon && (
+          <FontAwesomeIcon
+            icon={icon}
+            className={text ? "mr-2" : ""}
+            style={{
+              strokeWidth: 20,
+              stroke: "currentColor",
+              height: iconSize,
+              width: iconSize,
+            }}
+          />
+        )}
         <span className="font-bold">{text}</span>
       </button>
     </div>

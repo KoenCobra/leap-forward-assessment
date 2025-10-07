@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import ReactQueryProvider from "./ReactQueryProvider";
 config.autoAddCss = false;
 
 const flandersArtSans = localFont({
@@ -22,8 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${flandersArtSans.variable} antialiased`}>
-      <body>{children}</body>
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className={`${flandersArtSans.variable} antialiased`}
+    >
+      <body>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+      </body>
     </html>
   );
 }
