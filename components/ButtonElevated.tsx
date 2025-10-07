@@ -18,12 +18,12 @@ const ButtonElevated = ({
   afterColor = "after:bg-primary-blue-darkest",
 }: ButtonElevatedProps) => {
   return (
-    <div className="relative z-1">
+    <div className="relative z-1 h-full">
       <button
-        className={`m-0 p-0relative p-3 rounded-md text-center cursor-pointer
+        className={`${addedButtonClasses} relative p-3 rounded-md text-center cursor-pointer
           flex items-center justify-center
           after:content-[''] after:absolute after:inset-0 after:rounded-md  
-          after:translate-y-1 ${afterColor} after:-z-1 h-full ${addedButtonClasses}`}
+          after:translate-y-1 ${afterColor} after:-z-1`}
       >
         <FontAwesomeIcon
           icon={icon && icon}
