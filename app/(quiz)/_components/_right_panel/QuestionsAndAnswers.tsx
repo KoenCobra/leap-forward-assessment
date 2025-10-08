@@ -37,7 +37,6 @@ const QuestionsAndAnswers = () => {
   }
 
   const handleCheckQuestion = () => {
-    console.log("check question");
     setIsAnswerReady(true);
     setTime(0);
   };
