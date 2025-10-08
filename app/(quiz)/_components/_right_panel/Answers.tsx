@@ -12,11 +12,13 @@ const Answers = () => {
     isAnswerReady,
   } = useQuizContext();
 
-  const isAnswerCorrect = (answer: Answer) =>
-    answer.correct && selectedAnswers.includes(answer) && isAnswerReady;
+  const getAnswerStateClass = (answer: Answer) => {
+    if (!isAnswerReady || !selectedAnswers.includes(answer)) return "";
 
-  const isAnswerIncorrect = (answer: Answer) =>
-    !answer.correct && selectedAnswers.includes(answer) && isAnswerReady;
+    return answer.correct
+      ? "bg-primary-white outline-[3px] outline-success-green"
+      : "bg-primary-white outline-[3px] outline-error-red";
+  };
 
   const handleSetSelectedAnswers = (answer: Answer) => {
     if (selectedAnswers.includes(answer)) {
@@ -40,10 +42,7 @@ const Answers = () => {
               !isAnswerReady &&
               "bg-blue-medium text-primary-white outline-2 outline-secondary-yellow",
             isAnswerReady && "cursor-default",
-            isAnswerCorrect(answer) &&
-              "bg-primary-white outline-[3px] outline-success-green",
-            isAnswerIncorrect(answer) &&
-              "bg-primary-white outline-[3px] outline-error-red"
+            getAnswerStateClass(answer)
           )}
           onClick={() => handleSetSelectedAnswers(answer)}
         >
