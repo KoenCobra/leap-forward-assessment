@@ -28,13 +28,14 @@ const QuestionsAndAnswers = () => {
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
   const router = useRouter();
 
-  if (isLoadingQuestions) {
-    return <QuestionLoadingSkeleton />;
-  }
+  if (isLoadingQuestions) return <QuestionLoadingSkeleton />;
+  if (errorQuestions) return <QuestionsErrorState />;
 
-  if (!isLoadingQuestions && errorQuestions) {
-    return <QuestionsErrorState />;
-  }
+  const currentQuestion = questions?.[currentQuestionIndex];
+  const isLastQuestion =
+    questions?.length && currentQuestionIndex === questions.length - 1;
+  const canSubmit = isAnswerReady || hasSelectedAnswers;
+  const showTooltip = !canSubmit;
 
   const handleCheckQuestion = () => {
     setIsAnswerReady(true);
@@ -42,14 +43,29 @@ const QuestionsAndAnswers = () => {
   };
 
   const handleNextQuestion = () => {
-    if (questions?.length && currentQuestionIndex === questions?.length - 1) {
+    if (isLastQuestion) {
       router.push("/");
       return;
     }
+
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setIsAnswerReady(false);
     setSelectedAnswers([]);
   };
+
+  const handleButtonClick = () => {
+    if (isAnswerReady) return handleNextQuestion();
+
+    handleCheckQuestion();
+  };
+
+  const getButtonClasses = () =>
+    cn(
+      "bg-grey-light text-primary-blue-dark",
+      canSubmit
+        ? "bg-secondary-yellow after:bg-yellow-darkest"
+        : "cursor-default"
+    );
 
   return (
     <div className="bg-blue-background rounded-2xl p-4">
@@ -57,7 +73,7 @@ const QuestionsAndAnswers = () => {
         <QuestionTimer />
 
         <h2 className="font-bold text-center text-2xl mt-4.5">
-          {questions?.[currentQuestionIndex]?.question}
+          {currentQuestion?.question}
         </h2>
 
         <Answers />
@@ -66,26 +82,15 @@ const QuestionsAndAnswers = () => {
           <TooltipTrigger asChild>
             <div className="w-3/5 mx-auto mt-7.5">
               <ButtonElevated
-                isDisabled={!isAnswerReady && !hasSelectedAnswers}
+                isDisabled={!canSubmit}
                 text={isAnswerReady ? "Doorgaan!" : "Klaar!"}
-                addedButtonClasses={cn(
-                  "bg-grey-light text-primary-blue-dark",
-                  hasSelectedAnswers || isAnswerReady
-                    ? "bg-secondary-yellow after:bg-yellow-darkest"
-                    : "cursor-default"
-                )}
+                addedButtonClasses={getButtonClasses()}
                 afterColor="after:bg-grey-dark"
-                onClick={() => {
-                  if (!isAnswerReady) {
-                    return handleCheckQuestion();
-                  }
-
-                  handleNextQuestion();
-                }}
+                onClick={handleButtonClick}
               />
             </div>
           </TooltipTrigger>
-          {!hasSelectedAnswers && !isAnswerReady && (
+          {showTooltip && (
             <TooltipContent>
               <p>Selecteer minstens één antwoord</p>
             </TooltipContent>
@@ -95,9 +100,7 @@ const QuestionsAndAnswers = () => {
         {!isAnswerReady && (
           <ButtonElevated
             text="Geef me een tip..."
-            addedButtonClasses="
-             mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto
-             hover:bg-grey-light transition-all duration-300"
+            addedButtonClasses="mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto hover:bg-grey-light transition-all duration-300"
             afterColor="after:bg-grey-light"
           />
         )}
