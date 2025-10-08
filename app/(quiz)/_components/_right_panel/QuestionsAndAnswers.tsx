@@ -17,7 +17,7 @@ import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { hasSelectedAnswers } = useQuizContext();
+  const { hasSelectedAnswers, isTimeLimitReached } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
 
   if (isLoadingQuestions) {
@@ -47,7 +47,7 @@ const QuestionsAndAnswers = () => {
                 text="Klaar!"
                 addedButtonClasses={cn(
                   "bg-grey-light text-primary-blue-dark",
-                  hasSelectedAnswers
+                  hasSelectedAnswers || isTimeLimitReached
                     ? "bg-secondary-yellow after:bg-yellow-darkest"
                     : "cursor-not-allowed"
                 )}
@@ -63,6 +63,7 @@ const QuestionsAndAnswers = () => {
         </Tooltip>
 
         <ButtonElevated
+          isDisabled={isTimeLimitReached}
           text="Geef me een tip..."
           addedButtonClasses="
              mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto
