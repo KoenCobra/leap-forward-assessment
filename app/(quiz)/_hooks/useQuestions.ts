@@ -1,8 +1,10 @@
+import { API_URL, CACHE_TIME } from "@/lib/constants";
 import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../queyKeys";
 import { Question } from "../types";
 
 const fetchQuestions = async () => {
-  const response = await fetch("https://lab.lfwd.be/dev-test/quiz_data.json");
+  const response = await fetch(API_URL);
   return response.json() as Promise<Question[]>;
 };
 
@@ -12,10 +14,12 @@ export const useQuestions = () => {
     isLoading: isLoadingQuestions,
     error: errorQuestions,
   } = useQuery<Question[]>({
-    queryKey: ["questions"],
+    queryKey: [QUERY_KEYS.QUESTIONS],
     queryFn: async () => {
       return await fetchQuestions();
     },
+    staleTime: CACHE_TIME,
+    gcTime: CACHE_TIME,
   });
 
   return { questions, isLoadingQuestions, errorQuestions };

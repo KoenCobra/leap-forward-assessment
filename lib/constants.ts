@@ -21,3 +21,7 @@ export const LEVEL_CARDS = [
     borderColor: "border-red-400",
   },
 ];
+
+export const API_URL = "https://lab.lfwd.be/dev-test/quiz_data.json";
+
+export const CACHE_TIME = 1000 * 60 * 10;
