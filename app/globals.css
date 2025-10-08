@@ -27,6 +27,16 @@
   /* Background Images */
   --background-image-main: url("/images/main-bg.jpg");
   --background-image-printing-houses: url("/images/printing-house.jpg");
+
+  /* Shadcn UI Colors */
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card-foreground: var(--card-foreground);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
 }
 
 body {
@@ -34,4 +44,8 @@ body {
   background-color: var(--color-primary-blue-dark);
   color: var(--color-primary-white);
   letter-spacing: 0.8px;
+}
+
+:root {
+  --foreground: oklch(0.145 0 0);
 }

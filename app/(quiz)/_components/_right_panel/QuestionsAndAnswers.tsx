@@ -41,21 +41,25 @@ const QuestionsAndAnswers = () => {
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <ButtonElevated
-              isDisabled={!hasSelectedAnswers}
-              text="Klaar!"
-              addedButtonClasses={cn(
-                "mt-7.5 bg-grey-light text-primary-blue-dark w-3/5 mx-auto",
-                hasSelectedAnswers
-                  ? "bg-secondary-yellow after:bg-yellow-darkest"
-                  : "cursor-not-allowed"
-              )}
-              afterColor="after:bg-grey-dark"
-            />
+            <div className="w-3/5 mx-auto mt-7.5">
+              <ButtonElevated
+                isDisabled={!hasSelectedAnswers}
+                text="Klaar!"
+                addedButtonClasses={cn(
+                  "bg-grey-light text-primary-blue-dark",
+                  hasSelectedAnswers
+                    ? "bg-secondary-yellow after:bg-yellow-darkest"
+                    : "cursor-not-allowed"
+                )}
+                afterColor="after:bg-grey-dark"
+              />
+            </div>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>Selecteer minstens één antwoord</p>
-          </TooltipContent>
+          {!hasSelectedAnswers && (
+            <TooltipContent>
+              <p>Selecteer minstens één antwoord</p>
+            </TooltipContent>
+          )}
         </Tooltip>
 
         <ButtonElevated
