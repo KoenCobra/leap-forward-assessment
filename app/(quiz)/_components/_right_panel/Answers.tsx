@@ -12,39 +12,52 @@ const Answers = () => {
     isAnswerReady,
   } = useQuizContext();
 
-  const getAnswerStateClass = (answer: Answer) => {
-    if (!isAnswerReady || !selectedAnswers.includes(answer)) return "";
+  const currentAnswers = questions?.[currentQuestionIndex]?.answers ?? [];
+  const isSelected = (answer: Answer) => selectedAnswers.includes(answer);
 
-    return answer.correct
-      ? "bg-primary-white outline-[3px] outline-success-green"
-      : "bg-primary-white outline-[3px] outline-error-red";
+  const getAnswerClasses = (answer: Answer) => {
+    const selected = isSelected(answer);
+
+    return cn(
+      "w-full rounded-lg px-8 py-4 font-bold text-xl",
+      "bg-secondary-blue-light text-primary-blue-dark",
+
+      selected &&
+        !isAnswerReady && [
+          "bg-blue-medium text-primary-white",
+          "outline-2 outline-secondary-yellow",
+        ],
+
+      isAnswerReady && [
+        "cursor-default",
+        selected &&
+          answer.correct &&
+          "bg-primary-white outline-[3px] outline-success-green",
+        selected &&
+          !answer.correct &&
+          "bg-primary-white outline-[3px] outline-error-red",
+      ],
+
+      !isAnswerReady && "cursor-pointer"
+    );
   };
 
-  const handleSetSelectedAnswers = (answer: Answer) => {
-    if (selectedAnswers.includes(answer)) {
-      return setSelectedAnswers(
-        selectedAnswers.filter((selectedAnswer) => selectedAnswer !== answer)
-      );
-    }
-    setSelectedAnswers([...selectedAnswers, answer]);
+  const toggleAnswer = (answer: Answer) => {
+    setSelectedAnswers(
+      isSelected(answer)
+        ? selectedAnswers.filter((a) => a !== answer)
+        : [...selectedAnswers, answer]
+    );
   };
 
   return (
     <div className="grid grid-cols-2 gap-6 mt-8 w-full">
-      {questions?.[currentQuestionIndex]?.answers.map((answer) => (
+      {currentAnswers.map((answer) => (
         <button
-          disabled={isAnswerReady}
           key={answer.answer}
-          className={cn(
-            "w-full rounded-lg bg-secondary-blue-light cursor-pointer",
-            "px-8 py-4 text-primary-blue-dark font-bold text-xl",
-            selectedAnswers.includes(answer) &&
-              !isAnswerReady &&
-              "bg-blue-medium text-primary-white outline-2 outline-secondary-yellow",
-            isAnswerReady && "cursor-default",
-            getAnswerStateClass(answer)
-          )}
-          onClick={() => handleSetSelectedAnswers(answer)}
+          disabled={isAnswerReady}
+          className={getAnswerClasses(answer)}
+          onClick={() => toggleAnswer(answer)}
         >
           {answer.answer}
         </button>
