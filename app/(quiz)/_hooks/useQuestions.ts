@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../queyKeys";
 import { Question } from "../types";
 
-const fetchQuestions = async () => {
+export const fetchQuestions = async () => {
   const response = await fetch(API_URL);
   return response.json() as Promise<Question[]>;
 };
