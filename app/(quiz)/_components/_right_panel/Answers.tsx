@@ -9,8 +9,14 @@ const Answers = () => {
     currentQuestionIndex,
     selectedAnswers,
     setSelectedAnswers,
-    isTimeLimitReached,
+    isAnswerReady,
   } = useQuizContext();
+
+  const isAnswerCorrect = (answer: Answer) =>
+    answer.correct && selectedAnswers.includes(answer) && isAnswerReady;
+
+  const isAnswerIncorrect = (answer: Answer) =>
+    !answer.correct && selectedAnswers.includes(answer) && isAnswerReady;
 
   const handleSetSelectedAnswers = (answer: Answer) => {
     if (selectedAnswers.includes(answer)) {
@@ -25,14 +31,19 @@ const Answers = () => {
     <div className="grid grid-cols-2 gap-6 mt-8 w-full">
       {questions?.[currentQuestionIndex]?.answers.map((answer) => (
         <button
-          disabled={isTimeLimitReached}
+          disabled={isAnswerReady}
           key={answer.answer}
           className={cn(
             "w-full rounded-lg bg-secondary-blue-light cursor-pointer",
             "px-8 py-4 text-primary-blue-dark font-bold text-xl",
             selectedAnswers.includes(answer) &&
+              !isAnswerReady &&
               "bg-blue-medium text-primary-white outline-2 outline-secondary-yellow",
-            isTimeLimitReached && "cursor-default"
+            isAnswerReady && "cursor-default",
+            isAnswerCorrect(answer) &&
+              "bg-primary-white outline-[3px] outline-success-green",
+            isAnswerIncorrect(answer) &&
+              "bg-primary-white outline-[3px] outline-error-red"
           )}
           onClick={() => handleSetSelectedAnswers(answer)}
         >

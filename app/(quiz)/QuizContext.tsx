@@ -10,7 +10,8 @@ interface QuizContextProps {
   setSelectedAnswers: (answer: Answer[]) => void;
   time: number;
   setTime: (time: number | ((prev: number) => number)) => void;
-  isTimeLimitReached: boolean;
+  isAnswerReady: boolean;
+  setIsAnswerReady: (isAnswerReady: boolean) => void;
 }
 
 const QuizContext = createContext<QuizContextProps | null>(null);
@@ -21,9 +22,9 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
   const [time, setTime] = useState<number>(0);
+  const [isAnswerReady, setIsAnswerReady] = useState<boolean>(false);
 
   const hasSelectedAnswers = selectedAnswers.length > 0;
-  const isTimeLimitReached = time <= 0;
 
   const contextValue = useMemo<QuizContextProps>(
     () => ({
@@ -34,14 +35,15 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
       setSelectedAnswers,
       time,
       setTime,
-      isTimeLimitReached,
+      isAnswerReady,
+      setIsAnswerReady,
     }),
     [
       currentQuestionIndex,
       selectedAnswers,
       hasSelectedAnswers,
       time,
-      isTimeLimitReached,
+      isAnswerReady,
     ]
   );
 

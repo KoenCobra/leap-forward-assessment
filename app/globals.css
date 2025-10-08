@@ -21,6 +21,9 @@
   --color-yellow-darker: hsla(53, 84%, 47%, 1);
   --color-secondary-yellow: hsla(53, 100%, 50%, 1);
 
+  --color-success-green: hsla(111, 100%, 32%, 1);
+  --color-error-red: hsla(10, 86%, 57%, 1);
+
   /* Fonts */
   --font-main: var(--font-flanders-art-sans);
 

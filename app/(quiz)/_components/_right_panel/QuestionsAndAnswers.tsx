@@ -7,6 +7,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import Answers from "./Answers";
@@ -17,11 +18,15 @@ import QuestionsErrorState from "./QuestionsErrorState";
 const QuestionsAndAnswers = () => {
   const {
     hasSelectedAnswers,
-    isTimeLimitReached,
+    isAnswerReady,
     currentQuestionIndex,
     setCurrentQuestionIndex,
+    setIsAnswerReady,
+    setTime,
+    setSelectedAnswers,
   } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
+  const router = useRouter();
 
   if (isLoadingQuestions) {
     return <QuestionLoadingSkeleton />;
@@ -31,13 +36,20 @@ const QuestionsAndAnswers = () => {
     return <QuestionsErrorState />;
   }
 
+  const handleCheckQuestion = () => {
+    console.log("check question");
+    setIsAnswerReady(true);
+    setTime(0);
+  };
+
   const handleNextQuestion = () => {
-    if (hasSelectedAnswers || isTimeLimitReached) {
-      if (questions?.length && currentQuestionIndex === questions?.length - 1) {
-        return;
-      }
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    if (questions?.length && currentQuestionIndex === questions?.length - 1) {
+      router.push("/");
+      return;
     }
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setIsAnswerReady(false);
+    setSelectedAnswers([]);
   };
 
   return (
@@ -55,38 +67,41 @@ const QuestionsAndAnswers = () => {
           <TooltipTrigger asChild>
             <div className="w-3/5 mx-auto mt-7.5">
               <ButtonElevated
-                isDisabled={!hasSelectedAnswers}
-                text="Klaar!"
+                isDisabled={!isAnswerReady && !hasSelectedAnswers}
+                text={isAnswerReady ? "Doorgaan!" : "Klaar!"}
                 addedButtonClasses={cn(
                   "bg-grey-light text-primary-blue-dark",
-                  hasSelectedAnswers || isTimeLimitReached
+                  hasSelectedAnswers || isAnswerReady
                     ? "bg-secondary-yellow after:bg-yellow-darkest"
                     : "cursor-default"
                 )}
                 afterColor="after:bg-grey-dark"
                 onClick={() => {
-                  if (hasSelectedAnswers || isTimeLimitReached) {
+                  if (hasSelectedAnswers && !isAnswerReady) {
+                    handleCheckQuestion();
+                  } else {
                     handleNextQuestion();
                   }
                 }}
               />
             </div>
           </TooltipTrigger>
-          {!hasSelectedAnswers && !isTimeLimitReached && (
+          {!hasSelectedAnswers && !isAnswerReady && (
             <TooltipContent>
               <p>Selecteer minstens één antwoord</p>
             </TooltipContent>
           )}
         </Tooltip>
 
-        <ButtonElevated
-          isDisabled={isTimeLimitReached}
-          text="Geef me een tip..."
-          addedButtonClasses="
+        {!isAnswerReady && (
+          <ButtonElevated
+            text="Geef me een tip..."
+            addedButtonClasses="
              mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto
              hover:bg-grey-light transition-all duration-300"
-          afterColor="after:bg-grey-light"
-        />
+            afterColor="after:bg-grey-light"
+          />
+        )}
       </div>
     </div>
   );
