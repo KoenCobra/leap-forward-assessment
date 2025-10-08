@@ -1,10 +1,21 @@
 import { cn } from "@/lib/utils";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
+import { Answer } from "../../types";
 
 const Answers = () => {
   const { questions } = useQuestions();
-  const { index, selectedAnswers, handleSetSelectedAnswers } = useQuizContext();
+  const { index, selectedAnswers, setSelectedAnswers } = useQuizContext();
+
+  const handleSetSelectedAnswers = (answer: Answer) => {
+    if (selectedAnswers.includes(answer)) {
+      setSelectedAnswers(
+        selectedAnswers.filter((selectedAnswer) => selectedAnswer !== answer)
+      );
+      return;
+    }
+    setSelectedAnswers([...selectedAnswers, answer]);
+  };
 
   return (
     <div className="grid grid-cols-2 gap-6 mt-8 w-full">
