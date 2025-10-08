@@ -76,11 +76,11 @@ const QuestionsAndAnswers = () => {
                 )}
                 afterColor="after:bg-grey-dark"
                 onClick={() => {
-                  if (hasSelectedAnswers && !isAnswerReady) {
-                    handleCheckQuestion();
-                  } else {
-                    handleNextQuestion();
+                  if (!isAnswerReady) {
+                    return handleCheckQuestion();
                   }
+
+                  handleNextQuestion();
                 }}
               />
             </div>
