@@ -7,7 +7,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import Answers from "./Answers";
@@ -16,8 +15,12 @@ import QuestionTimer from "./QuestionTimer";
 import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { hasSelectedAnswers, isTimeLimitReached } = useQuizContext();
+  const {
+    hasSelectedAnswers,
+    isTimeLimitReached,
+    currentQuestionIndex,
+    setCurrentQuestionIndex,
+  } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
 
   if (isLoadingQuestions) {
@@ -27,6 +30,15 @@ const QuestionsAndAnswers = () => {
   if (!isLoadingQuestions && errorQuestions) {
     return <QuestionsErrorState />;
   }
+
+  const handleNextQuestion = () => {
+    if (hasSelectedAnswers || isTimeLimitReached) {
+      if (questions?.length && currentQuestionIndex === questions?.length - 1) {
+        return;
+      }
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
 
   return (
     <div className="bg-blue-background rounded-2xl p-4">
@@ -52,6 +64,11 @@ const QuestionsAndAnswers = () => {
                     : "cursor-default"
                 )}
                 afterColor="after:bg-grey-dark"
+                onClick={() => {
+                  if (hasSelectedAnswers || isTimeLimitReached) {
+                    handleNextQuestion();
+                  }
+                }}
               />
             </div>
           </TooltipTrigger>

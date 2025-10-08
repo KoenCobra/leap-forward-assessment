@@ -3,8 +3,8 @@ import { createContext, useMemo, useState } from "react";
 import { Answer } from "./types";
 
 interface QuizContextProps {
-  index: number;
-  setIndex: (index: number) => void;
+  currentQuestionIndex: number;
+  setCurrentQuestionIndex: (index: number) => void;
   selectedAnswers: Answer[];
   hasSelectedAnswers: boolean;
   setSelectedAnswers: (answer: Answer[]) => void;
@@ -18,7 +18,7 @@ const QuizContext = createContext<QuizContextProps | null>(null);
 const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [index, setIndex] = useState<number>(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
   const [time, setTime] = useState<number>(0);
 
@@ -27,8 +27,8 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const contextValue = useMemo<QuizContextProps>(
     () => ({
-      index,
-      setIndex,
+      currentQuestionIndex,
+      setCurrentQuestionIndex,
       selectedAnswers,
       hasSelectedAnswers,
       setSelectedAnswers,
@@ -36,7 +36,13 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
       setTime,
       isTimeLimitReached,
     }),
-    [index, selectedAnswers, hasSelectedAnswers, time, isTimeLimitReached]
+    [
+      currentQuestionIndex,
+      selectedAnswers,
+      hasSelectedAnswers,
+      time,
+      isTimeLimitReached,
+    ]
   );
 
   return (

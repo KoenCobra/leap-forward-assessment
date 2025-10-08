@@ -5,8 +5,12 @@ import { Answer } from "../../types";
 
 const Answers = () => {
   const { questions } = useQuestions();
-  const { index, selectedAnswers, setSelectedAnswers, isTimeLimitReached } =
-    useQuizContext();
+  const {
+    currentQuestionIndex,
+    selectedAnswers,
+    setSelectedAnswers,
+    isTimeLimitReached,
+  } = useQuizContext();
 
   const handleSetSelectedAnswers = (answer: Answer) => {
     if (selectedAnswers.includes(answer)) {
@@ -19,7 +23,7 @@ const Answers = () => {
 
   return (
     <div className="grid grid-cols-2 gap-6 mt-8 w-full">
-      {questions?.[index]?.answers.map((answer) => (
+      {questions?.[currentQuestionIndex]?.answers.map((answer) => (
         <button
           disabled={isTimeLimitReached}
           key={answer.answer}

@@ -6,9 +6,10 @@ import useQuizContext from "../../_hooks/useQuizContext";
 
 const QuestionTimer = () => {
   const { questions } = useQuestions();
-  const { index, time, setTime } = useQuizContext();
+  const { currentQuestionIndex, time, setTime } = useQuizContext();
 
-  const questionTimeLimit = questions?.[index]?.time_limit_s || 0;
+  const questionTimeLimit =
+    questions?.[currentQuestionIndex]?.time_limit_s || 0;
 
   useEffect(() => {
     if (questionTimeLimit) {
