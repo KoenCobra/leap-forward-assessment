@@ -14,19 +14,20 @@ const QuestionTimer = () => {
     isAnswerReady,
   } = useQuizContext();
 
-  const questionTimeLimit =
-    questions?.[currentQuestionIndex]?.time_limit_s || 0;
+  const currentQuestion = questions?.[currentQuestionIndex];
+  const timeLimit = currentQuestion?.time_limit_s || 0;
+  const formattedTime = `00:${String(time).padStart(2, "0")}`;
 
   useEffect(() => {
-    if (questionTimeLimit) {
-      setTime(questionTimeLimit);
+    if (timeLimit) {
+      setTime(timeLimit);
     }
-  }, [questionTimeLimit, setTime]);
+  }, [timeLimit, setTime]);
 
   useEffect(() => {
     if (isAnswerReady) return;
 
-    const timer = setInterval(() => {
+    const countdown = setInterval(() => {
       setTime((prev) => {
         if (prev <= 1) {
           setIsAnswerReady(true);
@@ -36,15 +37,13 @@ const QuestionTimer = () => {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [setTime, setIsAnswerReady, currentQuestionIndex, isAnswerReady]);
+    return () => clearInterval(countdown);
+  }, [setTime, setIsAnswerReady, isAnswerReady]);
 
   return (
     <div className="px-4 py-2 flex items-center gap-2 bg-primary-white rounded-4xl text-primary-blue-dark w-fit mx-auto">
       <FontAwesomeIcon icon={faStopwatch} className="text-sm" />
-      <span className="font-md font-bold">
-        00:{String(time).padStart(2, "0")}
-      </span>
+      <span className="font-md font-bold">{formattedTime}</span>
     </div>
   );
 };
