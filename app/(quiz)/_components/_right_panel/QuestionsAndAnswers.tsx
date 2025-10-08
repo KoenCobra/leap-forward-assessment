@@ -49,13 +49,13 @@ const QuestionsAndAnswers = () => {
                   "bg-grey-light text-primary-blue-dark",
                   hasSelectedAnswers || isTimeLimitReached
                     ? "bg-secondary-yellow after:bg-yellow-darkest"
-                    : "cursor-not-allowed"
+                    : "cursor-default"
                 )}
                 afterColor="after:bg-grey-dark"
               />
             </div>
           </TooltipTrigger>
-          {!hasSelectedAnswers && (
+          {!hasSelectedAnswers && !isTimeLimitReached && (
             <TooltipContent>
               <p>Selecteer minstens één antwoord</p>
             </TooltipContent>

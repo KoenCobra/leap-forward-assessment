@@ -27,7 +27,8 @@ const Answers = () => {
             "w-full rounded-lg bg-secondary-blue-light cursor-pointer",
             "px-8 py-4 text-primary-blue-dark font-bold text-xl",
             selectedAnswers.includes(answer) &&
-              "bg-blue-medium text-primary-white outline-2 outline-secondary-yellow"
+              "bg-blue-medium text-primary-white outline-2 outline-secondary-yellow",
+            isTimeLimitReached && "cursor-default"
           )}
           onClick={() => handleSetSelectedAnswers(answer)}
         >
