@@ -1,4 +1,7 @@
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import { Answer } from "../../types";
@@ -12,8 +15,34 @@ const Answers = () => {
     isAnswerReady,
   } = useQuizContext();
 
+  const answersContainerRef = useRef<HTMLDivElement>(null);
+
   const currentAnswers = questions?.[currentQuestionIndex]?.answers ?? [];
   const isSelected = (answer: Answer) => selectedAnswers.includes(answer);
+
+  // GSAP entrance animation
+  useGSAP(
+    () => {
+      const buttons = answersContainerRef.current?.children;
+      if (!buttons) return;
+
+      gsap.fromTo(
+        buttons,
+        {
+          y: 30,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.2,
+          stagger: 0.1,
+          ease: "power1",
+        }
+      );
+    },
+    { scope: answersContainerRef, dependencies: [currentQuestionIndex] }
+  );
 
   const getAnswerClasses = (answer: Answer) => {
     const selected = isSelected(answer);
@@ -51,7 +80,10 @@ const Answers = () => {
   };
 
   return (
-    <div className="grid lg:grid-cols-2 gap-6 mt-8 w-full">
+    <div
+      ref={answersContainerRef}
+      className="grid lg:grid-cols-2 gap-6 mt-8 w-full"
+    >
       {currentAnswers.map((answer) => (
         <button
           key={answer.answer}
