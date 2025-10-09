@@ -18,9 +18,12 @@ const DescriptionCard = ({
   return (
     <div className="rounded-2xl flex-1 flex flex-col">
       <div
-        className={`bg-${backgroundImage} bg-primary-blue-darkest/60 bg-blend-overlay
+        className="bg-primary-blue-darkest/60 bg-blend-overlay
           bg-cover bg-center h-48 xl:h-[40%]
-          rounded-t-lg p-2 relative`}
+          rounded-t-lg p-2 relative"
+        style={{
+          backgroundImage: `url('/images/${backgroundImage}.jpg')`,
+        }}
       >
         <div className="flex items-center gap-2">
           <GlobalQuizTimer />

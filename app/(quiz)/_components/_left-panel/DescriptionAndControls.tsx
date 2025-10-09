@@ -7,10 +7,10 @@ const DescriptionAndQuizControls = () => {
   return (
     <LeftPanel>
       <DescriptionCard
-        title={DESCRIPTION_CARD.printingHouses.title}
-        description={DESCRIPTION_CARD.printingHouses.description}
-        backgroundImage={DESCRIPTION_CARD.printingHouses.backgroundImage}
-        userImage={DESCRIPTION_CARD.printingHouses.userImage}
+        title={DESCRIPTION_CARD.printingHouse.title}
+        description={DESCRIPTION_CARD.printingHouse.description}
+        backgroundImage={DESCRIPTION_CARD.printingHouse.backgroundImage}
+        userImage={DESCRIPTION_CARD.printingHouse.userImage}
       />
       <QuizControls />
     </LeftPanel>

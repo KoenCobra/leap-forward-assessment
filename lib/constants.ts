@@ -27,15 +27,15 @@ export const USER_IMAGES = {
 };
 
 export const BACKGROUND_IMAGES = {
-  printingHouses: "printing-houses",
+  printingHouse: "printing-house",
 };
 
 export const DESCRIPTION_CARD = {
-  printingHouses: {
+  printingHouse: {
     title: "Drukkerij",
     description:
       "Je moet je goed bewust zijn van wat jij allemaal moet doen. Als drukafwerker heb je een heel uiteenlopend takenpakket. Sommige van onderstaande taken behoren echter niet tot het takenpakket, stop er snel mee voor je baas het ziet!",
-    backgroundImage: BACKGROUND_IMAGES.printingHouses,
+    backgroundImage: BACKGROUND_IMAGES.printingHouse,
     userImage: USER_IMAGES.manager,
   },
 };

@@ -29,7 +29,7 @@
 
   /* Background Images */
   --background-image-main: url("/images/main-bg.jpg");
-  --background-image-printing-houses: url("/images/printing-house.jpg");
+  --background-image-printing-house: url("/images/printing-house.jpg");
 
   /* Shadcn UI Colors */
   --color-accent-foreground: var(--accent-foreground);
