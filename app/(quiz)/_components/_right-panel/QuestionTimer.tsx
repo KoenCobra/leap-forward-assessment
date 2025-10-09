@@ -1,11 +1,16 @@
+import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef } from "react";
+import { useSound } from "react-sounds";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 
 const QuestionTimer = () => {
+  const { play } = useSound(SOUNDS.time_almost_up);
+  const { play: playAllCorrectAnswers } = useSound(SOUNDS.all_correct_answers);
+  const { play: playIncorrectAnswers } = useSound(SOUNDS.incorrect_answers);
   const { questions } = useQuestions();
   const {
     currentQuestionIndex,
@@ -13,6 +18,8 @@ const QuestionTimer = () => {
     setTime,
     setIsAnswerReady,
     isAnswerReady,
+    hasAllAnswerCorrect,
+    isLowTime,
   } = useQuizContext();
 
   const timerContainerRef = useRef<HTMLDivElement>(null);
@@ -34,6 +41,11 @@ const QuestionTimer = () => {
       setTime((prev) => {
         if (prev <= 1) {
           setIsAnswerReady(true);
+          if (hasAllAnswerCorrect) {
+            playAllCorrectAnswers();
+          } else {
+            playIncorrectAnswers();
+          }
           return 0;
         }
         return prev - 1;
@@ -41,9 +53,20 @@ const QuestionTimer = () => {
     }, 1000);
 
     return () => clearInterval(countdown);
-  }, [setTime, setIsAnswerReady, isAnswerReady]);
+  }, [
+    setTime,
+    setIsAnswerReady,
+    isAnswerReady,
+    hasAllAnswerCorrect,
+    playAllCorrectAnswers,
+    playIncorrectAnswers,
+  ]);
 
-  const isLowTime = time <= 3 && time > 0;
+  useEffect(() => {
+    if (isLowTime) {
+      play();
+    }
+  }, [play, isLowTime]);
 
   return (
     <div

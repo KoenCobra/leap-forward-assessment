@@ -7,8 +7,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useSound } from "react-sounds";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import Answers from "./Answers";
@@ -25,9 +27,12 @@ const QuestionsAndAnswers = () => {
     setIsAnswerReady,
     setTime,
     setSelectedAnswers,
+    hasAllAnswerCorrect,
   } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
   const router = useRouter();
+  const { play: playAllCorrectAnswers } = useSound(SOUNDS.all_correct_answers);
+  const { play: playIncorrectAnswers } = useSound(SOUNDS.incorrect_answers);
 
   if (isLoadingQuestions) return <QuestionLoadingSkeleton />;
   if (errorQuestions) return <QuestionsErrorState />;
@@ -41,6 +46,11 @@ const QuestionsAndAnswers = () => {
   const handleCheckQuestion = () => {
     setIsAnswerReady(true);
     setTime(0);
+    if (hasAllAnswerCorrect) {
+      playAllCorrectAnswers();
+    } else {
+      playIncorrectAnswers();
+    }
   };
 
   const handleNextQuestion = () => {
