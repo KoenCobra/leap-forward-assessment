@@ -51,7 +51,7 @@ const Answers = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6 mt-8 w-full">
+    <div className="grid lg:grid-cols-2 gap-6 mt-8 w-full">
       {currentAnswers.map((answer) => (
         <button
           key={answer.answer}
