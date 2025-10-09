@@ -42,6 +42,7 @@
   --color-background: var(--background);
 
   --animate-scale-pulse: scale-pulse 1s ease-in-out infinite;
+  --animate-fadeInDown: fadeInDown 0.8s ease-out both;
 
   @keyframes scale-pulse {
     0%,
@@ -50,6 +51,17 @@
     }
     50% {
       transform: scale(1.1);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

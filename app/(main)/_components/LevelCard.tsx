@@ -21,8 +21,8 @@ const LevelCard = ({
         "bg-primary-white rounded-lg p-3 text-center",
         "border-b-12",
         "relative group",
-        "hover:cursor-pointer hover:shadow-2xl hover:shadow-blue-medium/50",
-        "transition-all duration-300",
+        "hover:cursor-pointer hover:shadow-2xl hover:shadow-blue-medium/50 hover:translate-y[-5px]",
+        "transition-shadow duration-300",
         borderColor
       )}
     >
