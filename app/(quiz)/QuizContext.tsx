@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useMemo, useState } from "react";
+import { createContext, useState } from "react";
 import { Answer } from "./types";
 
 interface QuizContextProps {
@@ -26,26 +26,17 @@ const QuizContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const hasSelectedAnswers = selectedAnswers.length > 0;
 
-  const contextValue = useMemo<QuizContextProps>(
-    () => ({
-      currentQuestionIndex,
-      setCurrentQuestionIndex,
-      selectedAnswers,
-      hasSelectedAnswers,
-      setSelectedAnswers,
-      time,
-      setTime,
-      isAnswerReady,
-      setIsAnswerReady,
-    }),
-    [
-      currentQuestionIndex,
-      selectedAnswers,
-      hasSelectedAnswers,
-      time,
-      isAnswerReady,
-    ]
-  );
+  const contextValue = {
+    currentQuestionIndex,
+    setCurrentQuestionIndex,
+    selectedAnswers,
+    hasSelectedAnswers,
+    setSelectedAnswers,
+    time,
+    setTime,
+    isAnswerReady,
+    setIsAnswerReady,
+  };
 
   return (
     <QuizContext.Provider value={contextValue}>{children}</QuizContext.Provider>

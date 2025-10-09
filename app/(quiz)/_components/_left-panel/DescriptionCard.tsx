@@ -2,23 +2,33 @@ import Image from "next/image";
 import GlobalQuizTimer from "./GlobalQuizTimer";
 import LevelProgress from "./LevelProgress";
 
-const DescriptionCard = () => {
+interface DescriptionCardProps {
+  title: string;
+  description: string;
+  backgroundImage: string;
+  userImage: string;
+}
+
+const DescriptionCard = ({
+  title,
+  description,
+  backgroundImage,
+  userImage,
+}: DescriptionCardProps) => {
   return (
     <div className="rounded-2xl flex-1 flex flex-col">
       <div
-        className="
-          bg-printing-houses bg-primary-blue-darkest/60 bg-blend-overlay
+        className={`bg-${backgroundImage} bg-primary-blue-darkest/60 bg-blend-overlay
           bg-cover bg-center h-48 xl:h-[40%]
-          rounded-t-lg p-2 relative
-        "
+          rounded-t-lg p-2 relative`}
       >
         <div className="flex items-center gap-2">
           <GlobalQuizTimer />
           <LevelProgress />
         </div>
         <Image
-          src="/images/manager.png"
-          alt="manager"
+          src={`/images/${userImage}`}
+          alt={userImage}
           width={135}
           height={135}
           className="
@@ -36,7 +46,7 @@ const DescriptionCard = () => {
             border-b-2 border-blue-medium
             w-fit mx-auto"
         >
-          Drukkerij
+          {title}
         </h2>
         <p
           className="
@@ -44,10 +54,7 @@ const DescriptionCard = () => {
             mt-4 text-balance max-w-2xl mx-auto pb-6
           "
         >
-          Je moet je goed bewust zijn van wat jij allemaal moet doen. Als
-          drukafwerker heb je een heel uiteenlopend takenpakket. Sommige van
-          onderstaande taken behoren echter niet tot het takenpakket, stop er
-          snel mee voor je baas het ziet!
+          {description}
         </p>
       </div>
     </div>

@@ -22,6 +22,24 @@ export const LEVEL_CARDS = [
   },
 ];
 
+export const USER_IMAGES = {
+  manager: "manager.png",
+};
+
+export const BACKGROUND_IMAGES = {
+  printingHouses: "printing-houses",
+};
+
+export const DESCRIPTION_CARD = {
+  printingHouses: {
+    title: "Drukkerij",
+    description:
+      "Je moet je goed bewust zijn van wat jij allemaal moet doen. Als drukafwerker heb je een heel uiteenlopend takenpakket. Sommige van onderstaande taken behoren echter niet tot het takenpakket, stop er snel mee voor je baas het ziet!",
+    backgroundImage: BACKGROUND_IMAGES.printingHouses,
+    userImage: USER_IMAGES.manager,
+  },
+};
+
 export const API_URL = "https://lab.lfwd.be/dev-test/quiz_data.json";
 
 export const CACHE_TIME = 1000 * 60 * 10;
