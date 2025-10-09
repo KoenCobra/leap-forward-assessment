@@ -5,7 +5,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import DescriptionAndQuizControls from "../_components/_left-panel/DescriptionAndControls";
-import QuestionsAndAnswers from "../_components/_right_panel/QuestionsAndAnswers";
+import QuestionsAndAnswers from "../_components/_right-panel/QuestionsAndAnswers";
 import { fetchQuestions } from "../_hooks/useQuestions";
 import { QUERY_KEYS } from "../queyKeys";
 
