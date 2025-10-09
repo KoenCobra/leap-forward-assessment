@@ -20,7 +20,6 @@ const Answers = () => {
   const currentAnswers = questions?.[currentQuestionIndex]?.answers ?? [];
   const isSelected = (answer: Answer) => selectedAnswers.includes(answer);
 
-  // GSAP entrance animation
   useGSAP(
     () => {
       const buttons = answersContainerRef.current?.children;
