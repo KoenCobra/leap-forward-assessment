@@ -16,6 +16,7 @@ interface DescriptionCardProps {
   description: string;
   backgroundImage: string;
   userImage: string;
+  isShowingLevelProgress?: boolean;
 }
 
 const DescriptionCard = ({
@@ -23,6 +24,7 @@ const DescriptionCard = ({
   description,
   backgroundImage,
   userImage,
+  isShowingLevelProgress = true,
 }: DescriptionCardProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -52,8 +54,9 @@ const DescriptionCard = ({
       >
         <div ref={headerRef} className="flex items-center gap-2">
           <GlobalQuizTimer />
-          {/* TODO: make level dynamic */}
-          <LevelProgress level={2} totalLevels={8} />
+          {isShowingLevelProgress && (
+            <LevelProgress level={2} totalLevels={8} />
+          )}
         </div>
 
         <Image
@@ -85,7 +88,7 @@ const DescriptionCard = ({
           ref={descriptionRef}
           className="
             text-primary-blue-dark font-light leading-5.5
-            mt-4 text-balance max-w-2xl mx-auto pb-6
+            mt-4 text-balance max-w-2xl mx-auto pb-6 whitespace-pre-line
           "
         >
           {description}

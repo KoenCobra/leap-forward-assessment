@@ -24,10 +24,12 @@ export const LEVEL_CARDS = [
 
 export const USER_IMAGES = {
   manager: "manager.png",
+  woman: "profile1.png",
 };
 
 export const BACKGROUND_IMAGES = {
   printingHouse: "printing-house",
+  map: "map",
 };
 
 export const DESCRIPTION_CARD = {
@@ -37,6 +39,13 @@ export const DESCRIPTION_CARD = {
       "Je moet je goed bewust zijn van wat jij allemaal moet doen. Als drukafwerker heb je een heel uiteenlopend takenpakket. Sommige van onderstaande taken behoren echter niet tot het takenpakket, stop er snel mee voor je baas het ziet!",
     backgroundImage: BACKGROUND_IMAGES.printingHouse,
     userImage: USER_IMAGES.manager,
+  },
+  map: {
+    title: "Selecteer jouw kans",
+    description:
+      "Ik heb een paar boeiende kansen voor jou gezien in onze buurt. Ik heb ze op de kaart aangeduid.\n\n Kijk eens goed rond en laat me weten welke kans jij met beide handen wil grijpen.",
+    backgroundImage: BACKGROUND_IMAGES.map,
+    userImage: USER_IMAGES.woman,
   },
 };
 

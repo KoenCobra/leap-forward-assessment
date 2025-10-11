@@ -1,3 +1,6 @@
+import { LeftPanel } from "@/components/LeftPanel";
+import MainLayout from "@/components/MainLayout";
+import RightPanel from "@/components/RightPanel";
 import { CACHE_TIME } from "@/lib/constants";
 import {
   dehydrate,
@@ -31,10 +34,14 @@ const QuizPage = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="min-h-screen space-y-4 xl:space-y-0 p-2 xl:p-6 xl:grid xl:grid-cols-[32%_1fr] gap-4">
-        <DescriptionAndQuizControls />
-        <QuestionsAndAnswers />
-      </div>
+      <MainLayout>
+        <LeftPanel>
+          <DescriptionAndQuizControls />
+        </LeftPanel>
+        <RightPanel>
+          <QuestionsAndAnswers />
+        </RightPanel>
+      </MainLayout>
     </HydrationBoundary>
   );
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import { LeftPanel } from "@/components/LeftPanel";
 import { DESCRIPTION_CARD } from "@/lib/constants";
 import { useRef } from "react";
 import {
@@ -25,17 +24,15 @@ const DescriptionAndQuizControls = () => {
   });
 
   return (
-    <LeftPanel>
-      <div ref={containerRef} className="contents">
-        <DescriptionCard
-          title={DESCRIPTION_CARD.printingHouse.title}
-          description={DESCRIPTION_CARD.printingHouse.description}
-          backgroundImage={DESCRIPTION_CARD.printingHouse.backgroundImage}
-          userImage={DESCRIPTION_CARD.printingHouse.userImage}
-        />
-        <QuizControls />
-      </div>
-    </LeftPanel>
+    <div ref={containerRef} className="contents">
+      <DescriptionCard
+        title={DESCRIPTION_CARD.printingHouse.title}
+        description={DESCRIPTION_CARD.printingHouse.description}
+        backgroundImage={DESCRIPTION_CARD.printingHouse.backgroundImage}
+        userImage={DESCRIPTION_CARD.printingHouse.userImage}
+      />
+      <QuizControls />
+    </div>
   );
 };
 
