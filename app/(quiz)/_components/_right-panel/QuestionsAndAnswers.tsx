@@ -9,7 +9,10 @@ import {
 } from "@/components/ui/tooltip";
 import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 import { useSound } from "react-sounds";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
@@ -19,6 +22,7 @@ import QuestionTimer from "./QuestionTimer";
 import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
+  const panelRef = useRef<HTMLDivElement>(null);
   const {
     hasSelectedAnswers,
     isAnswerReady,
@@ -33,6 +37,27 @@ const QuestionsAndAnswers = () => {
   const router = useRouter();
   const { play: playAllCorrectAnswers } = useSound(SOUNDS.all_correct_answers);
   const { play: playIncorrectAnswers } = useSound(SOUNDS.incorrect_answers);
+
+  useGSAP(
+    () => {
+      if (!panelRef.current) return;
+
+      gsap.fromTo(
+        panelRef.current,
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        }
+      );
+    },
+    { scope: panelRef, dependencies: [isLoadingQuestions] }
+  );
 
   if (isLoadingQuestions) return <QuestionLoadingSkeleton />;
   if (errorQuestions) return <QuestionsErrorState />;
@@ -80,7 +105,10 @@ const QuestionsAndAnswers = () => {
 
   return (
     <RightPanel>
-      <div className="bg-primary-blue-darkest h-full rounded-2xl pt-2 px-12 pb-15.5">
+      <div
+        ref={panelRef}
+        className="bg-primary-blue-darkest h-full rounded-2xl pt-2 px-12 pb-15.5"
+      >
         <QuestionTimer />
 
         <h2 className="font-bold text-center text-2xl mt-4.5">

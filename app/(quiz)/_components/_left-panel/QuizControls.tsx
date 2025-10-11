@@ -1,3 +1,4 @@
+"use client";
 import ButtonElevated from "@/components/ButtonElevated";
 import {
   faMap,
@@ -5,10 +6,41 @@ import {
   faRotateRight,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
 
 const QuizControls = () => {
+  const controlsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const buttons = controlsRef.current?.children;
+      if (!buttons) return;
+
+      gsap.fromTo(
+        buttons,
+        {
+          scale: 0.8,
+          opacity: 0,
+          y: 20,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+        }
+      );
+    },
+    { scope: controlsRef }
+  );
+
   return (
     <div
+      ref={controlsRef}
       className="
         grid grid-cols-3 gap-2  
         md:grid-cols-[auto_auto_auto_1fr] 
