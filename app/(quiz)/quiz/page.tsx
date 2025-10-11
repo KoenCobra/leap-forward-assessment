@@ -7,12 +7,22 @@ import {
 import DescriptionAndQuizControls from "../_components/_left-panel/DescriptionAndControls";
 import QuestionsAndAnswers from "../_components/_right-panel/QuestionsAndAnswers";
 import { fetchQuestions } from "../_hooks/useQuestions";
-import { QUERY_KEYS } from "../queyKeys";
+import { QUERY_KEYS } from "../queryKeys";
 
-const page = async () => {
+/**
+ * Quiz Page Component (Server Component)
+ *
+ * Implements server-side data prefetching for optimal performance
+ * Questions are fetched on the server and hydrated on the client
+ *
+ * Layout:
+ * - Left Panel: Quiz description and controls
+ * - Right Panel: Questions and answers
+ */
+const QuizPage = async () => {
   const queryClient = new QueryClient();
 
-  // Prefetch the questions on the server
+  // Prefetch questions on the server for instant display
   await queryClient.prefetchQuery({
     queryKey: [QUERY_KEYS.QUESTIONS],
     queryFn: fetchQuestions,
@@ -29,4 +39,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default QuizPage;

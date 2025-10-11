@@ -1,14 +1,29 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
-import useSound from "use-sound";
+import { useCallback, useRef } from "react";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
-import { Answer } from "../../types";
+import { useQuizSounds } from "../../_hooks/useQuizSounds";
+import { ANIMATION_DELAYS } from "../../constants";
+import { Answer, isAnswerSelected } from "../../types";
 
+/**
+ * Answers Component
+ *
+ * Displays answer options for the current question
+ * Features:
+ * - Multi-select answer support
+ * - Visual feedback for selected/correct/incorrect answers
+ * - Hover animations
+ * - Sound effects on interaction
+ * - Staggered entrance animations
+ */
 const Answers = () => {
-  const [playButtonSoft] = useSound("/sounds/button_soft.mp3");
+  const answersContainerRef = useRef<HTMLDivElement>(null);
+  const { playClick } = useQuizSounds();
   const { questions } = useQuestions();
   const {
     currentQuestionIndex,
@@ -17,11 +32,9 @@ const Answers = () => {
     isAnswerReady,
   } = useQuizContext();
 
-  const answersContainerRef = useRef<HTMLDivElement>(null);
-
   const currentAnswers = questions?.[currentQuestionIndex]?.answers ?? [];
-  const isSelected = (answer: Answer) => selectedAnswers.includes(answer);
 
+  // Staggered animation for answer buttons
   useGSAP(
     () => {
       const buttons = answersContainerRef.current?.children;
@@ -39,7 +52,7 @@ const Answers = () => {
           y: 0,
           opacity: 1,
           duration: 0.4,
-          delay: 0.5,
+          delay: ANIMATION_DELAYS.ANSWERS,
           stagger: 0.08,
           ease: "back.out(1.5)",
         }
@@ -48,59 +61,84 @@ const Answers = () => {
     { scope: answersContainerRef, dependencies: [currentQuestionIndex] }
   );
 
-  const handleButtonHover = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    entering: boolean
-  ) => {
-    if (isAnswerReady) return;
+  /**
+   * Handles hover animation for answer buttons
+   * Scales up slightly on hover for better UX
+   */
+  const handleButtonHover = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>, entering: boolean) => {
+      if (isAnswerReady) return;
 
-    gsap.to(e.currentTarget, {
-      scale: entering ? 1.02 : 1,
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  };
+      gsap.to(e.currentTarget, {
+        scale: entering ? 1.02 : 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    },
+    [isAnswerReady]
+  );
 
-  const getAnswerClasses = (answer: Answer) => {
-    const selected = isSelected(answer);
+  /**
+   * Determines CSS classes for answer button based on its state
+   * - Default: light blue background
+   * - Selected (before reveal): darker blue with yellow outline
+   * - Correct (after reveal): white background with green outline
+   * - Incorrect (after reveal): white background with red outline
+   */
+  const getAnswerClasses = useCallback(
+    (answer: Answer) => {
+      const selected = isAnswerSelected(answer, selectedAnswers);
 
-    return cn(
-      "w-full rounded-lg px-8 py-4 font-bold text-xl",
-      "bg-secondary-blue-light text-primary-blue-dark",
+      return cn(
+        "w-full rounded-lg px-8 py-4 font-bold text-xl",
+        "bg-secondary-blue-light text-primary-blue-dark",
 
-      selected &&
-        !isAnswerReady && [
-          "bg-blue-medium text-primary-white",
-          "outline-2 outline-secondary-yellow",
+        // Selected state (before answer is revealed)
+        selected &&
+          !isAnswerReady && [
+            "bg-blue-medium text-primary-white",
+            "outline-2 outline-secondary-yellow",
+          ],
+
+        // Revealed state (after clicking "Klaar!")
+        isAnswerReady && [
+          "cursor-default",
+          selected &&
+            answer.correct &&
+            "bg-primary-white outline-[3px] outline-success-green",
+          selected &&
+            !answer.correct &&
+            "bg-primary-white outline-[3px] outline-error-red",
         ],
 
-      isAnswerReady && [
-        "cursor-default",
-        selected &&
-          answer.correct &&
-          "bg-primary-white outline-[3px] outline-success-green",
-        selected &&
-          !answer.correct &&
-          "bg-primary-white outline-[3px] outline-error-red",
-      ],
+        !isAnswerReady && "cursor-pointer"
+      );
+    },
+    [selectedAnswers, isAnswerReady]
+  );
 
-      !isAnswerReady && "cursor-pointer"
-    );
-  };
-
-  const toggleAnswer = (answer: Answer) => {
-    playButtonSoft();
-    setSelectedAnswers(
-      isSelected(answer)
-        ? selectedAnswers.filter((a) => a !== answer)
-        : [...selectedAnswers, answer]
-    );
-  };
+  /**
+   * Toggles answer selection
+   * Supports multi-select - answers can be added/removed from selection
+   */
+  const toggleAnswer = useCallback(
+    (answer: Answer) => {
+      playClick();
+      setSelectedAnswers(
+        isAnswerSelected(answer, selectedAnswers)
+          ? selectedAnswers.filter((a) => a !== answer)
+          : [...selectedAnswers, answer]
+      );
+    },
+    [playClick, selectedAnswers, setSelectedAnswers]
+  );
 
   return (
     <div
       ref={answersContainerRef}
       className="grid lg:grid-cols-2 gap-6 mt-8 w-full"
+      role="group"
+      aria-label="Answer options"
     >
       {currentAnswers.map((answer) => (
         <button
@@ -110,6 +148,8 @@ const Answers = () => {
           onClick={() => toggleAnswer(answer)}
           onMouseEnter={(e) => handleButtonHover(e, true)}
           onMouseLeave={(e) => handleButtonHover(e, false)}
+          aria-pressed={isAnswerSelected(answer, selectedAnswers)}
+          aria-label={`Answer option: ${answer.answer}`}
         >
           {answer.answer}
         </button>
