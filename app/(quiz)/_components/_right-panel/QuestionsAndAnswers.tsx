@@ -23,6 +23,10 @@ import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
   const panelRef = useRef<HTMLDivElement>(null);
+  const questionRef = useRef<HTMLHeadingElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+  const tipButtonRef = useRef<HTMLDivElement>(null);
+
   const {
     hasSelectedAnswers,
     isAnswerReady,
@@ -57,6 +61,72 @@ const QuestionsAndAnswers = () => {
       );
     },
     { scope: panelRef, dependencies: [isLoadingQuestions] }
+  );
+
+  useGSAP(
+    () => {
+      if (!questionRef.current) return;
+
+      gsap.fromTo(
+        questionRef.current,
+        {
+          y: 20,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: 0.3,
+          ease: "power2.out",
+        }
+      );
+    },
+    { scope: questionRef, dependencies: [currentQuestionIndex] }
+  );
+
+  useGSAP(
+    () => {
+      if (!buttonsRef.current) return;
+
+      gsap.fromTo(
+        buttonsRef.current,
+        {
+          y: 20,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          delay: 0.8,
+          ease: "power2.out",
+        }
+      );
+    },
+    { scope: buttonsRef, dependencies: [currentQuestionIndex] }
+  );
+
+  useGSAP(
+    () => {
+      if (!tipButtonRef.current || isAnswerReady) return;
+
+      gsap.fromTo(
+        tipButtonRef.current,
+        {
+          y: 20,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          delay: 0.8,
+          ease: "power2.out",
+        }
+      );
+    },
+    { scope: tipButtonRef, dependencies: [currentQuestionIndex] }
   );
 
   if (isLoadingQuestions) return <QuestionLoadingSkeleton />;
@@ -111,7 +181,7 @@ const QuestionsAndAnswers = () => {
       >
         <QuestionTimer />
 
-        <h2 className="font-bold text-center text-2xl mt-4.5">
+        <h2 ref={questionRef} className="font-bold text-center text-2xl mt-4.5">
           {currentQuestion?.question}
         </h2>
 
@@ -119,7 +189,7 @@ const QuestionsAndAnswers = () => {
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="w-3/5 mx-auto mt-7.5">
+            <div ref={buttonsRef} className="w-3/5 mx-auto mt-7.5">
               <ButtonElevated
                 isDisabled={!canSubmit}
                 text={isAnswerReady ? "Doorgaan!" : "Klaar!"}
@@ -137,11 +207,13 @@ const QuestionsAndAnswers = () => {
         </Tooltip>
 
         {!isAnswerReady && (
-          <ButtonElevated
-            text="Geef me een tip..."
-            addedButtonClasses="mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto hover:bg-grey-light transition-all duration-300"
-            afterColor="after:bg-grey-light"
-          />
+          <div ref={tipButtonRef}>
+            <ButtonElevated
+              text="Geef me een tip..."
+              addedButtonClasses="mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto hover:bg-grey-light transition-all duration-300"
+              afterColor="after:bg-grey-light"
+            />
+          </div>
         )}
       </div>
     </RightPanel>

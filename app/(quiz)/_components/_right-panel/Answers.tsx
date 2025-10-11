@@ -31,20 +31,36 @@ const Answers = () => {
       gsap.fromTo(
         buttons,
         {
+          scale: 0.9,
           y: 30,
           opacity: 0,
         },
         {
+          scale: 1,
           y: 0,
           opacity: 1,
-          duration: 0.2,
-          stagger: 0.1,
-          ease: "power1",
+          duration: 0.4,
+          delay: 0.5,
+          stagger: 0.08,
+          ease: "back.out(1.5)",
         }
       );
     },
     { scope: answersContainerRef, dependencies: [currentQuestionIndex] }
   );
+
+  const handleButtonHover = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    entering: boolean
+  ) => {
+    if (isAnswerReady) return;
+
+    gsap.to(e.currentTarget, {
+      scale: entering ? 1.02 : 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
 
   const getAnswerClasses = (answer: Answer) => {
     const selected = isSelected(answer);
@@ -93,6 +109,8 @@ const Answers = () => {
           disabled={isAnswerReady}
           className={getAnswerClasses(answer)}
           onClick={() => toggleAnswer(answer)}
+          onMouseEnter={(e) => handleButtonHover(e, true)}
+          onMouseLeave={(e) => handleButtonHover(e, false)}
         >
           {answer.answer}
         </button>

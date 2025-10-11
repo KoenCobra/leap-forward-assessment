@@ -2,6 +2,8 @@ import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { useSound } from "react-sounds";
 import { useQuestions } from "../../_hooks/useQuestions";
@@ -23,6 +25,29 @@ const QuestionTimer = () => {
   } = useQuizContext();
 
   const timerContainerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!timerContainerRef.current) return;
+
+      gsap.fromTo(
+        timerContainerRef.current,
+        {
+          scale: 0.8,
+          y: -20,
+          opacity: 0,
+        },
+        {
+          scale: 1,
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        }
+      );
+    },
+    { scope: timerContainerRef, dependencies: [currentQuestionIndex] }
+  );
 
   const currentQuestion = questions?.[currentQuestionIndex];
   const timeLimit = currentQuestion?.time_limit_s || 0;
