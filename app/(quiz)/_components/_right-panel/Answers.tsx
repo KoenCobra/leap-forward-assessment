@@ -71,7 +71,7 @@ const Answers = () => {
             "outline-2 outline-secondary-yellow",
           ],
 
-        // Revealed state (after clicking "Klaar!")
+        // Revealed state (after answer is revealed)
         isAnswerReady && [
           "cursor-default",
           selected &&
@@ -88,10 +88,6 @@ const Answers = () => {
     [selectedAnswers, isAnswerReady]
   );
 
-  /**
-   * Toggles answer selection
-   * Supports multi-select - answers can be added/removed from selection
-   */
   const toggleAnswer = useCallback(
     (answer: Answer) => {
       playClick();
