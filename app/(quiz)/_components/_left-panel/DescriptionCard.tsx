@@ -1,5 +1,6 @@
 "use client";
 
+import LevelProgress from "@/components/LevelProgress";
 import Image from "next/image";
 import { useRef } from "react";
 import {
@@ -9,7 +10,6 @@ import {
   useGSAPChildrenAnimation,
 } from "../../_hooks/useGSAPAnimation";
 import GlobalQuizTimer from "./GlobalQuizTimer";
-import LevelProgress from "./LevelProgress";
 
 interface DescriptionCardProps {
   title: string;
@@ -52,7 +52,8 @@ const DescriptionCard = ({
       >
         <div ref={headerRef} className="flex items-center gap-2">
           <GlobalQuizTimer />
-          <LevelProgress />
+          {/* TODO: make level dynamic */}
+          <LevelProgress level={2} totalLevels={8} />
         </div>
 
         <Image
