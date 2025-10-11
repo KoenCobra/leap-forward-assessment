@@ -14,18 +14,6 @@ interface DescriptionCardProps {
   userImage: string;
 }
 
-/**
- * DescriptionCard Component
- *
- * Displays quiz context information with:
- * - Background image showing job/sector context
- * - User/character image
- * - Global quiz timer
- * - Level progress indicator
- * - Title and description
- *
- * Features coordinated entrance animations for all elements
- */
 const DescriptionCard = ({
   title,
   description,
@@ -37,9 +25,7 @@ const DescriptionCard = ({
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
 
-  // Coordinated entrance animations
   useGSAP(() => {
-    // Animate header elements (timer and progress)
     if (headerRef.current?.children) {
       gsap.fromTo(
         headerRef.current.children,
@@ -57,7 +43,6 @@ const DescriptionCard = ({
       );
     }
 
-    // Animate user image with rotation for visual interest
     gsap.fromTo(
       imageRef.current,
       {
@@ -72,7 +57,6 @@ const DescriptionCard = ({
       }
     );
 
-    // Animate title
     gsap.fromTo(
       titleRef.current,
       {
@@ -87,7 +71,6 @@ const DescriptionCard = ({
       }
     );
 
-    // Animate description
     gsap.fromTo(
       descriptionRef.current,
       {
@@ -105,7 +88,6 @@ const DescriptionCard = ({
 
   return (
     <div className="rounded-2xl flex-1 flex flex-col">
-      {/* Header section with background image */}
       <div
         className="bg-primary-blue-darkest/60 bg-blend-overlay
           bg-cover bg-center h-48 xl:h-[40%]
@@ -114,13 +96,11 @@ const DescriptionCard = ({
           backgroundImage: `url('/images/${backgroundImage}.jpg')`,
         }}
       >
-        {/* Timer and progress indicators */}
         <div ref={headerRef} className="flex items-center gap-2">
           <GlobalQuizTimer />
           <LevelProgress />
         </div>
 
-        {/* User/character image - positioned to overlap card sections */}
         <Image
           ref={imageRef}
           src={`/images/${userImage}`}
@@ -135,7 +115,6 @@ const DescriptionCard = ({
         />
       </div>
 
-      {/* Content section */}
       <div className="bg-primary-white rounded-b-lg p-4 h-full text-center">
         <h2
           ref={titleRef}

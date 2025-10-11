@@ -10,17 +10,6 @@ import { useQuizSounds } from "../../_hooks/useQuizSounds";
 import { ANIMATION_DELAYS } from "../../constants";
 import { Answer, isAnswerSelected } from "../../types";
 
-/**
- * Answers Component
- *
- * Displays answer options for the current question
- * Features:
- * - Multi-select answer support
- * - Visual feedback for selected/correct/incorrect answers
- * - Hover animations
- * - Sound effects on interaction
- * - Staggered entrance animations
- */
 const Answers = () => {
   const answersContainerRef = useRef<HTMLDivElement>(null);
   const { playClick } = useQuizSounds();
@@ -34,7 +23,6 @@ const Answers = () => {
 
   const currentAnswers = questions?.[currentQuestionIndex]?.answers ?? [];
 
-  // Staggered animation for answer buttons
   useGSAP(
     () => {
       const buttons = answersContainerRef.current?.children;
@@ -61,10 +49,6 @@ const Answers = () => {
     { scope: answersContainerRef, dependencies: [currentQuestionIndex] }
   );
 
-  /**
-   * Handles hover animation for answer buttons
-   * Scales up slightly on hover for better UX
-   */
   const handleButtonHover = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>, entering: boolean) => {
       if (isAnswerReady) return;
@@ -78,7 +62,7 @@ const Answers = () => {
     [isAnswerReady]
   );
 
-  /**
+  /*
    * Determines CSS classes for answer button based on its state
    * - Default: light blue background
    * - Selected (before reveal): darker blue with yellow outline

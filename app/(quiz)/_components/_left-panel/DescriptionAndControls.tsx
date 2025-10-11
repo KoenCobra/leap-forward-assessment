@@ -8,19 +8,9 @@ import { useRef } from "react";
 import DescriptionCard from "./DescriptionCard";
 import QuizControls from "./QuizControls";
 
-/**
- * DescriptionAndControls Component
- *
- * Left panel container combining:
- * - DescriptionCard: Quiz context and user info
- * - QuizControls: Action buttons for quiz navigation
- *
- * Features staggered entrance animation for visual appeal
- */
 const DescriptionAndQuizControls = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Staggered animation for child components
   useGSAP(
     () => {
       const children = containerRef.current?.children;

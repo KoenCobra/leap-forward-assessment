@@ -4,16 +4,6 @@ import { createContext, ReactNode, useMemo, useState } from "react";
 import { LOW_TIME_THRESHOLD } from "./constants";
 import { Answer, QuizContextValue } from "./types";
 
-/**
- * Quiz Context - Manages global quiz state
- *
- * This context provides:
- * - Current question navigation
- * - Answer selection state
- * - Timer state
- * - Computed quiz properties
- */
-
 const QuizContext = createContext<QuizContextValue | null>(null);
 
 interface QuizContextProviderProps {

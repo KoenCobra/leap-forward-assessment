@@ -1,8 +1,3 @@
-/**
- * Quiz-specific constants
- * Contains timing configurations and UI thresholds
- */
-
 /** Time threshold (in seconds) when timer should show warning state */
 export const LOW_TIME_THRESHOLD = 3;
 

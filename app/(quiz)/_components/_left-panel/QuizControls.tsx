@@ -11,24 +11,9 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 
-/**
- * QuizControls Component
- *
- * Action buttons for quiz functionality:
- * - Help/Info button
- * - Restart quiz button
- * - Mute/Unmute button
- * - Navigate to map button (primary action)
- *
- * Features:
- * - Responsive grid layout
- * - Staggered entrance animation
- * - Bounce effect on appearance
- */
 const QuizControls = () => {
   const controlsRef = useRef<HTMLDivElement>(null);
 
-  // Staggered bounce-in animation for buttons
   useGSAP(
     () => {
       const buttons = controlsRef.current?.children;
@@ -63,22 +48,18 @@ const QuizControls = () => {
         xl:grid-cols-3
         2xl:md:grid-cols-[auto_auto_auto_1fr]"
     >
-      {/* Help/Info button */}
       <div className="col-span-1 xl:col-span-1">
         <ButtonElevated icon={faQuestion} />
       </div>
 
-      {/* Restart button */}
       <div className="col-span-1 xl:col-span-1">
         <ButtonElevated icon={faRotateRight} />
       </div>
 
-      {/* Mute toggle button */}
       <div className="col-span-1 xl:col-span-1">
         <ButtonElevated icon={faVolumeXmark} />
       </div>
 
-      {/* Primary action: Navigate to map */}
       <div className="col-span-3 md:col-span-1 xl:col-span-3 2xl:col-span-1">
         <ButtonElevated
           icon={faMap}

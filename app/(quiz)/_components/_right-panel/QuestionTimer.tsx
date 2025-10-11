@@ -12,29 +12,16 @@ import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import { useQuizTimer } from "../../_hooks/useQuizTimer";
 
-/**
- * QuestionTimer Component
- *
- * Displays a countdown timer for the current question
- * Features:
- * - Auto-submission when timer reaches zero
- * - Visual warning when time is running low
- * - Sound effects for time warnings
- * - Smooth animations on question changes
- */
 const QuestionTimer = () => {
   const timerContainerRef = useRef<HTMLDivElement>(null);
   const { questions } = useQuestions();
   const { currentQuestionIndex } = useQuizContext();
 
-  // Get current question and its time limit
   const currentQuestion = questions?.[currentQuestionIndex];
   const timeLimit = currentQuestion?.time_limit_s || 0;
 
-  // Use custom timer hook for all timer logic
   const { formattedTime, isLowTime } = useQuizTimer(timeLimit);
 
-  // Animate timer on question change
   useGSAPAnimation(timerContainerRef, ANIMATION_PRESETS.scaleIn(), [
     currentQuestionIndex,
   ]);

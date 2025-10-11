@@ -23,23 +23,6 @@ import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
 import QuestionTimer from "./QuestionTimer";
 import QuestionsErrorState from "./QuestionsErrorState";
 
-/**
- * QuestionsAndAnswers Component
- *
- * Main component for the quiz interface
- * Responsibilities:
- * - Display current question
- * - Show answer options
- * - Handle answer submission
- * - Navigate between questions
- * - Display loading and error states
- *
- * Features:
- * - Server-side data prefetching
- * - Smooth animations
- * - Sound effects
- * - Accessibility support
- */
 const QuestionsAndAnswers = () => {
   // Refs for animations
   const panelRef = useRef<HTMLDivElement>(null);
@@ -93,10 +76,6 @@ const QuestionsAndAnswers = () => {
     [currentQuestionIndex, isAnswerReady]
   );
 
-  /**
-   * Validates and reveals the correctness of selected answers
-   * Plays appropriate sound effect based on results
-   */
   const handleCheckQuestion = useCallback(() => {
     setIsAnswerReady(true);
 
@@ -107,10 +86,6 @@ const QuestionsAndAnswers = () => {
     }
   }, [setIsAnswerReady, hasAllAnswerCorrect, playCorrect, playError]);
 
-  /**
-   * Advances to next question or returns to home on quiz completion
-   * Resets question-specific state
-   */
   const handleNextQuestion = useCallback(() => {
     if (isLastQuestion) {
       router.push("/");
@@ -129,10 +104,6 @@ const QuestionsAndAnswers = () => {
     router,
   ]);
 
-  /**
-   * Handles main action button click
-   * Either checks answers or moves to next question depending on state
-   */
   const handleButtonClick = useCallback(() => {
     if (isAnswerReady) {
       handleNextQuestion();
@@ -141,9 +112,6 @@ const QuestionsAndAnswers = () => {
     }
   }, [isAnswerReady, handleNextQuestion, handleCheckQuestion]);
 
-  /**
-   * Determines button styling based on submit state
-   */
   const getButtonClasses = useCallback(
     () =>
       cn(
@@ -155,12 +123,10 @@ const QuestionsAndAnswers = () => {
     [canSubmit]
   );
 
-  // Loading state
   if (isLoadingQuestions) {
     return <QuestionLoadingSkeleton />;
   }
 
-  // Error state
   if (errorQuestions) {
     return <QuestionsErrorState />;
   }
@@ -171,18 +137,14 @@ const QuestionsAndAnswers = () => {
         ref={panelRef}
         className="bg-primary-blue-darkest h-full rounded-2xl pt-2 px-12 pb-15.5"
       >
-        {/* Timer - counts down for each question */}
         <QuestionTimer />
 
-        {/* Current question text */}
         <h2 ref={questionRef} className="font-bold text-center text-2xl mt-4.5">
           {currentQuestion?.question}
         </h2>
 
-        {/* Answer options grid */}
         <Answers />
 
-        {/* Main action button (Check / Continue) */}
         <Tooltip>
           <TooltipTrigger asChild>
             <div ref={buttonsRef} className="w-3/5 mx-auto mt-7.5">
@@ -202,7 +164,6 @@ const QuestionsAndAnswers = () => {
           )}
         </Tooltip>
 
-        {/* Hint button - only shown before answer is revealed */}
         {!isAnswerReady && (
           <div ref={tipButtonRef}>
             <ButtonElevated

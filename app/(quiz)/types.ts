@@ -1,7 +1,3 @@
-/**
- * Core types for the quiz feature
- */
-
 /** Represents a single answer option for a question */
 export interface Answer {
   answer: string;
@@ -14,10 +10,6 @@ export interface Question {
   time_limit_s: number;
   answers: Answer[];
 }
-
-/**
- * Quiz state management types
- */
 
 /** Props for the Quiz Context */
 export interface QuizContextValue {
