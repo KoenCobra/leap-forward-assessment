@@ -4,14 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
-import { useSound } from "react-sounds";
+import useSound from "use-sound";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 
 const QuestionTimer = () => {
-  const { play: playItemDeselect } = useSound("/sounds/item_deselect.mp3");
-  const { play: playAllCorrectAnswers } = useSound("/sounds/completed.mp3");
-  const { play: playIncorrectAnswers } = useSound("/sounds/error.mp3");
+  const [playItemTimeAlmostUp] = useSound("/sounds/item_deselect.mp3");
+  const [playAllCorrectAnswers] = useSound("/sounds/completed.mp3");
+  const [playIncorrectAnswers] = useSound("/sounds/error.mp3");
+
   const { questions } = useQuestions();
   const {
     currentQuestionIndex,
@@ -65,11 +66,6 @@ const QuestionTimer = () => {
       setTime((prev) => {
         if (prev <= 1) {
           setIsAnswerReady(true);
-          if (hasAllAnswerCorrect) {
-            playAllCorrectAnswers();
-          } else {
-            playIncorrectAnswers();
-          }
           return 0;
         }
         return prev - 1;
@@ -77,20 +73,29 @@ const QuestionTimer = () => {
     }, 1000);
 
     return () => clearInterval(countdown);
+  }, [setTime, setIsAnswerReady, isAnswerReady]);
+
+  useEffect(() => {
+    if (isAnswerReady && time === 0) {
+      if (hasAllAnswerCorrect) {
+        playAllCorrectAnswers();
+      } else {
+        playIncorrectAnswers();
+      }
+    }
   }, [
-    setTime,
-    setIsAnswerReady,
     isAnswerReady,
+    time,
     hasAllAnswerCorrect,
     playAllCorrectAnswers,
     playIncorrectAnswers,
   ]);
 
   useEffect(() => {
-    if (isLowTime) {
-      playItemDeselect();
+    if (time > 0 && time <= 3) {
+      playItemTimeAlmostUp();
     }
-  }, [playItemDeselect, isLowTime]);
+  }, [playItemTimeAlmostUp, time]);
 
   return (
     <div

@@ -12,7 +12,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
-import { useSound } from "react-sounds";
+import useSound from "use-sound";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import Answers from "./Answers";
@@ -32,14 +32,13 @@ const QuestionsAndAnswers = () => {
     currentQuestionIndex,
     setCurrentQuestionIndex,
     setIsAnswerReady,
-    setTime,
     setSelectedAnswers,
     hasAllAnswerCorrect,
   } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
   const router = useRouter();
-  const { play: playAllCorrectAnswers } = useSound("/sounds/completed.mp3");
-  const { play: playIncorrectAnswers } = useSound("/sounds/error.mp3");
+  const [playAllCorrectAnswers] = useSound("/sounds/completed.mp3");
+  const [playIncorrectAnswers] = useSound("/sounds/error.mp3");
 
   useGSAP(
     () => {
@@ -139,7 +138,6 @@ const QuestionsAndAnswers = () => {
 
   const handleCheckQuestion = () => {
     setIsAnswerReady(true);
-    setTime(0);
     if (hasAllAnswerCorrect) {
       playAllCorrectAnswers();
     } else {

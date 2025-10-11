@@ -2,13 +2,13 @@ import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import { useSound } from "react-sounds";
+import useSound from "use-sound";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import { Answer } from "../../types";
 
 const Answers = () => {
-  const { play } = useSound("/sounds/button_soft.mp3");
+  const [playButtonSoft] = useSound("/sounds/button_soft.mp3");
   const { questions } = useQuestions();
   const {
     currentQuestionIndex,
@@ -89,7 +89,7 @@ const Answers = () => {
   };
 
   const toggleAnswer = (answer: Answer) => {
-    play();
+    playButtonSoft();
     setSelectedAnswers(
       isSelected(answer)
         ? selectedAnswers.filter((a) => a !== answer)
