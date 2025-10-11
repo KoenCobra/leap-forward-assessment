@@ -1,9 +1,13 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import Image from "next/image";
 import { useRef } from "react";
+import {
+  ANIMATION_PRESETS,
+  CHILDREN_ANIMATION_PRESETS,
+  useGSAPAnimation,
+  useGSAPChildrenAnimation,
+} from "../../_hooks/useGSAPAnimation";
 import GlobalQuizTimer from "./GlobalQuizTimer";
 import LevelProgress from "./LevelProgress";
 
@@ -25,66 +29,16 @@ const DescriptionCard = ({
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
 
-  useGSAP(() => {
-    if (headerRef.current?.children) {
-      gsap.fromTo(
-        headerRef.current.children,
-        {
-          y: -20,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power2.out",
-        }
-      );
-    }
+  useGSAPChildrenAnimation(
+    headerRef,
+    CHILDREN_ANIMATION_PRESETS.fadeSlideDownStagger(0.6, 0.1)
+  );
 
-    gsap.fromTo(
-      imageRef.current,
-      {
-        scale: 0,
-        rotation: -180,
-      },
-      {
-        scale: 1,
-        rotation: 0,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-      }
-    );
+  useGSAPAnimation(imageRef, ANIMATION_PRESETS.rotateScaleIn(0.8));
 
-    gsap.fromTo(
-      titleRef.current,
-      {
-        y: 20,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      }
-    );
+  useGSAPAnimation(titleRef, ANIMATION_PRESETS.fadeSlideUp(0.5));
 
-    gsap.fromTo(
-      descriptionRef.current,
-      {
-        y: 20,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power2.out",
-      }
-    );
-  });
+  useGSAPAnimation(descriptionRef, ANIMATION_PRESETS.fadeSlideUp(0.5));
 
   return (
     <div className="rounded-2xl flex-1 flex flex-col">

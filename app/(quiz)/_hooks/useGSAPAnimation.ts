@@ -11,6 +11,14 @@ interface AnimationConfig {
 }
 
 /**
+ * Extended animation configuration with callback support
+ */
+interface AnimationConfigWithCallbacks extends AnimationConfig {
+  onComplete?: () => void;
+  onStart?: () => void;
+}
+
+/**
  * Custom hook for GSAP animations with consistent patterns
  * Reduces boilerplate and ensures consistent animation behavior
  *
@@ -30,6 +38,33 @@ export const useGSAPAnimation = (
       gsap.fromTo(elementRef.current, config.from, config.to);
     },
     { scope: elementRef, dependencies }
+  );
+};
+
+/**
+ * Custom hook for animating children of a container element
+ * Useful for staggered animations of multiple elements
+ *
+ * @param containerRef - Reference to the container element
+ * @param config - Animation configuration with optional callbacks
+ * @param dependencies - Dependencies array to trigger re-animation
+ */
+export const useGSAPChildrenAnimation = (
+  containerRef: RefObject<HTMLElement | null>,
+  config: AnimationConfigWithCallbacks,
+  dependencies: unknown[] = []
+) => {
+  useGSAP(
+    () => {
+      const children = containerRef.current?.children;
+      if (!children) return;
+
+      // Execute onStart callback if provided
+      config.onStart?.();
+
+      gsap.fromTo(children, config.from, config.to);
+    },
+    { scope: containerRef, dependencies }
   );
 };
 
@@ -58,6 +93,64 @@ export const ANIMATION_PRESETS = {
       duration,
       delay,
       stagger,
+      ease: "back.out(1.5)",
+    },
+  }),
+  rotateScaleIn: (duration = 0.8, delay = 0): AnimationConfig => ({
+    from: { scale: 0, rotation: -180 },
+    to: { scale: 1, rotation: 0, duration, delay, ease: "back.out(1.7)" },
+  }),
+};
+
+/**
+ * Predefined animation configurations for children/staggered animations
+ */
+export const CHILDREN_ANIMATION_PRESETS = {
+  fadeSlideUpStagger: (
+    duration = 0.8,
+    stagger = 0.2,
+    delay = 0
+  ): AnimationConfig => ({
+    from: { y: 50, opacity: 0 },
+    to: { y: 0, opacity: 1, duration, stagger, delay, ease: "power3.out" },
+  }),
+  fadeSlideDownStagger: (
+    duration = 0.6,
+    stagger = 0.1,
+    delay = 0
+  ): AnimationConfig => ({
+    from: { y: -20, opacity: 0 },
+    to: { y: 0, opacity: 1, duration, stagger, delay, ease: "power2.out" },
+  }),
+  scaleInStagger: (
+    duration = 0.5,
+    stagger = 0.1,
+    delay = 0
+  ): AnimationConfig => ({
+    from: { scale: 0.8, opacity: 0, y: 20 },
+    to: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      duration,
+      stagger,
+      delay,
+      ease: "back.out(1.7)",
+    },
+  }),
+  bounceInStagger: (
+    duration = 0.4,
+    stagger = 0.08,
+    delay = 0
+  ): AnimationConfig => ({
+    from: { scale: 0.9, y: 30, opacity: 0 },
+    to: {
+      scale: 1,
+      y: 0,
+      opacity: 1,
+      duration,
+      stagger,
+      delay,
       ease: "back.out(1.5)",
     },
   }),

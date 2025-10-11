@@ -7,36 +7,18 @@ import {
   faRotateRight,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { useRef } from "react";
+import {
+  CHILDREN_ANIMATION_PRESETS,
+  useGSAPChildrenAnimation,
+} from "../../_hooks/useGSAPAnimation";
 
 const QuizControls = () => {
   const controlsRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      const buttons = controlsRef.current?.children;
-      if (!buttons) return;
-
-      gsap.fromTo(
-        buttons,
-        {
-          scale: 0.8,
-          opacity: 0,
-          y: 20,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "back.out(1.7)",
-        }
-      );
-    },
-    { scope: controlsRef }
+  useGSAPChildrenAnimation(
+    controlsRef,
+    CHILDREN_ANIMATION_PRESETS.scaleInStagger(0.5, 0.1)
   );
 
   return (

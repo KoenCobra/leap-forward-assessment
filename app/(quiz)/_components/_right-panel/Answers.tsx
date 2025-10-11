@@ -1,9 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useCallback, useRef } from "react";
+import {
+  CHILDREN_ANIMATION_PRESETS,
+  useGSAPChildrenAnimation,
+} from "../../_hooks/useGSAPAnimation";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import { useQuizSounds } from "../../_hooks/useQuizSounds";
@@ -23,30 +26,14 @@ const Answers = () => {
 
   const currentAnswers = questions?.[currentQuestionIndex]?.answers ?? [];
 
-  useGSAP(
-    () => {
-      const buttons = answersContainerRef.current?.children;
-      if (!buttons) return;
-
-      gsap.fromTo(
-        buttons,
-        {
-          scale: 0.9,
-          y: 30,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          y: 0,
-          opacity: 1,
-          duration: 0.4,
-          delay: ANIMATION_DELAYS.ANSWERS,
-          stagger: 0.08,
-          ease: "back.out(1.5)",
-        }
-      );
-    },
-    { scope: answersContainerRef, dependencies: [currentQuestionIndex] }
+  useGSAPChildrenAnimation(
+    answersContainerRef,
+    CHILDREN_ANIMATION_PRESETS.bounceInStagger(
+      0.4,
+      0.08,
+      ANIMATION_DELAYS.ANSWERS
+    ),
+    [currentQuestionIndex]
   );
 
   const handleButtonHover = useCallback(
