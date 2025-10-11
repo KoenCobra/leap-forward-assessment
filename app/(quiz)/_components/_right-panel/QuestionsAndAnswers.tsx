@@ -7,7 +7,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -39,8 +38,8 @@ const QuestionsAndAnswers = () => {
   } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
   const router = useRouter();
-  const { play: playAllCorrectAnswers } = useSound(SOUNDS.all_correct_answers);
-  const { play: playIncorrectAnswers } = useSound(SOUNDS.incorrect_answers);
+  const { play: playAllCorrectAnswers } = useSound("/sounds/completed.mp3");
+  const { play: playIncorrectAnswers } = useSound("/sounds/error.mp3");
 
   useGSAP(
     () => {

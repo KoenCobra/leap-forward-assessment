@@ -1,4 +1,3 @@
-import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -9,7 +8,7 @@ import useQuizContext from "../../_hooks/useQuizContext";
 import { Answer } from "../../types";
 
 const Answers = () => {
-  const { play } = useSound(SOUNDS.button_soft_double);
+  const { play } = useSound("/sounds/button_soft.mp3");
   const { questions } = useQuestions();
   const {
     currentQuestionIndex,

@@ -43,10 +43,3 @@ export const DESCRIPTION_CARD = {
 export const API_URL = "https://lab.lfwd.be/dev-test/quiz_data.json";
 
 export const CACHE_TIME = 1000 * 60 * 10;
-
-export const SOUNDS = {
-  button_soft_double: "ui/button_soft",
-  time_almost_up: "ui/item_deselect",
-  all_correct_answers: "notification/completed",
-  incorrect_answers: "notification/error",
-};

@@ -5,7 +5,6 @@ import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import ReactQueryProvider from "./ReactQueryProvider";
-import SoundProvider from "./SoundProvider";
 config.autoAddCss = false;
 
 const flandersArtSans = localFont({
@@ -30,9 +29,7 @@ export default function RootLayout({
       className={`${flandersArtSans.variable} antialiased`}
     >
       <body>
-        <SoundProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </SoundProvider>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

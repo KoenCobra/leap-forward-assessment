@@ -1,4 +1,3 @@
-import { SOUNDS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,9 +9,9 @@ import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 
 const QuestionTimer = () => {
-  const { play } = useSound(SOUNDS.time_almost_up);
-  const { play: playAllCorrectAnswers } = useSound(SOUNDS.all_correct_answers);
-  const { play: playIncorrectAnswers } = useSound(SOUNDS.incorrect_answers);
+  const { play: playItemDeselect } = useSound("/sounds/item_deselect.mp3");
+  const { play: playAllCorrectAnswers } = useSound("/sounds/completed.mp3");
+  const { play: playIncorrectAnswers } = useSound("/sounds/error.mp3");
   const { questions } = useQuestions();
   const {
     currentQuestionIndex,
@@ -89,9 +88,9 @@ const QuestionTimer = () => {
 
   useEffect(() => {
     if (isLowTime) {
-      play();
+      playItemDeselect();
     }
-  }, [play, isLowTime]);
+  }, [playItemDeselect, isLowTime]);
 
   return (
     <div
