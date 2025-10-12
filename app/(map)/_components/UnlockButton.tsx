@@ -1,29 +1,27 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const buttonPositions = [
-  { top: 25, left: 30 },
-  { top: 60, left: 70 },
-  { top: 45, left: 15 },
-  { top: 75, left: 40 },
-  { top: 20, left: 70 },
-];
-
-const UnlockButton = () => {
+interface UnlockButtonProps {
+  position: { top: number; left: number };
+}
+const UnlockButton = ({ position }: UnlockButtonProps) => {
   return (
     <>
-      {buttonPositions.map((position, index) => (
-        <button
-          key={index}
-          className="absolute bg-primary-blue-dark rounded-full grid place-items-center size-20 cursor-pointer"
-          style={{
-            top: `${position.top}%`,
-            left: `${position.left}%`,
-          }}
-        >
-          <FontAwesomeIcon icon={faLock} size="2x" />
-        </button>
-      ))}
+      <button
+        className={cn(
+          "absolute rounded-full bg-primary-blue-dark",
+          "grid place-items-center size-20 cursor-pointer"
+        )}
+        style={{
+          top: `${position.top}%`,
+          left: `${position.left}%`,
+        }}
+      >
+        <FontAwesomeIcon icon={faLock} size="2x" />
+      </button>
     </>
   );
 };

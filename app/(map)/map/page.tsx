@@ -5,7 +5,13 @@ import RightPanel from "@/components/RightPanel";
 import { DESCRIPTION_CARD } from "@/lib/constants";
 import MapNavigation from "../_components/MapNavigation";
 
-const MapPage = ({ searchParams }: { searchParams: { image: string } }) => {
+const MapPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ image: string }>;
+}) => {
+  const params = await searchParams;
+
   return (
     <MainLayout>
       <LeftPanel>
@@ -13,7 +19,7 @@ const MapPage = ({ searchParams }: { searchParams: { image: string } }) => {
           title={DESCRIPTION_CARD.map.title}
           description={DESCRIPTION_CARD.map.description}
           backgroundImage={DESCRIPTION_CARD.map.backgroundImage}
-          userImage={searchParams.image}
+          userImage={params.image}
           isShowingLevelProgress={false}
         />
       </LeftPanel>
