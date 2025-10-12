@@ -60,8 +60,10 @@ export const useGSAPChildrenAnimation = (
       if (!children) return;
 
       config.onStart?.();
-      gsap.fromTo(children, config.from, config.to);
-      config.onComplete?.();
+      gsap.fromTo(children, config.from, {
+        ...config.to,
+        onComplete: config.onComplete,
+      });
     },
     { scope: containerRef, dependencies }
   );
