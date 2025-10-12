@@ -50,12 +50,12 @@ const MapNavigation = () => {
   });
 
   return (
-    <div className="relative h-full rounded-2xl bg-map bg-cover bg-center p-3">
+    <div className="relative h-screen xl:h-full rounded-2xl bg-map bg-cover bg-center p-3">
       <div ref={levelProgressRef} className="w-1/2 lg:w-1/3 xl:w-1/5 invisible">
         <LevelProgress level={0} totalLevels={6} />
       </div>
 
-      <div ref={buttonsRef} className="[&>*]:invisible">
+      <div ref={buttonsRef} className="[&>*]:invisible h-full">
         {buttonPositions.map((position, index) => (
           <UnlockButton key={index} position={position} />
         ))}
