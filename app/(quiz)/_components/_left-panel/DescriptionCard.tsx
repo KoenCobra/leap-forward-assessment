@@ -49,7 +49,7 @@ const DescriptionCard = ({
           bg-cover bg-center h-48 xl:h-[40%]
           rounded-t-lg p-2 relative"
         style={{
-          backgroundImage: `url('/images/${backgroundImage}.jpg')`,
+          backgroundImage: `url('/images/${backgroundImage}')`,
         }}
       >
         <div ref={headerRef} className="flex items-center gap-2">

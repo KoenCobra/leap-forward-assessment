@@ -24,12 +24,12 @@ export const LEVEL_CARDS = [
 
 export const USER_IMAGES = {
   manager: "manager.png",
-  woman: "profile1.png",
+  profile1: "profile1.png",
 };
 
 export const BACKGROUND_IMAGES = {
-  printingHouse: "printing-house",
-  map: "map",
+  printingHouse: "printing-house.jpg",
+  map: "buildings.png",
 };
 
 export const DESCRIPTION_CARD = {
@@ -45,7 +45,7 @@ export const DESCRIPTION_CARD = {
     description:
       "Ik heb een paar boeiende kansen voor jou gezien in onze buurt. Ik heb ze op de kaart aangeduid.\n\n Kijk eens goed rond en laat me weten welke kans jij met beide handen wil grijpen.",
     backgroundImage: BACKGROUND_IMAGES.map,
-    userImage: USER_IMAGES.woman,
+    userImage: USER_IMAGES.profile1,
   },
 };
 

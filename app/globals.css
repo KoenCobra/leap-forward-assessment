@@ -28,7 +28,7 @@
   --font-main: var(--font-flanders-art-sans);
 
   /* Background Images */
-  --background-image-main: url("/images/main-bg.jpg");
+  --background-image-main: url("/images/main-bg.png");
   --background-image-printing-house: url("/images/printing-house.jpg");
   --background-image-map: url("/images/map.png");
 
