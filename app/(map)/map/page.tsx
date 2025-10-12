@@ -3,6 +3,7 @@ import { LeftPanel } from "@/components/LeftPanel";
 import MainLayout from "@/components/MainLayout";
 import RightPanel from "@/components/RightPanel";
 import { DESCRIPTION_CARD } from "@/lib/constants";
+import MapNavigation from "../_components/MapNavigation";
 
 const MapPage = () => {
   return (
@@ -17,7 +18,7 @@ const MapPage = () => {
         />
       </LeftPanel>
       <RightPanel>
-        <div>Map</div>
+        <MapNavigation />
       </RightPanel>
     </MainLayout>
   );
