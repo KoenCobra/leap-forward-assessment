@@ -61,7 +61,7 @@ const DescriptionCard = ({
 
         <Image
           ref={imageRef}
-          src={`/images/${userImage}`}
+          src={userImage.startsWith("/") ? userImage : `/images/${userImage}`}
           alt={title}
           width={135}
           height={135}

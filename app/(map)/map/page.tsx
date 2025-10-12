@@ -5,7 +5,7 @@ import RightPanel from "@/components/RightPanel";
 import { DESCRIPTION_CARD } from "@/lib/constants";
 import MapNavigation from "../_components/MapNavigation";
 
-const MapPage = () => {
+const MapPage = ({ searchParams }: { searchParams: { image: string } }) => {
   return (
     <MainLayout>
       <LeftPanel>
@@ -13,7 +13,7 @@ const MapPage = () => {
           title={DESCRIPTION_CARD.map.title}
           description={DESCRIPTION_CARD.map.description}
           backgroundImage={DESCRIPTION_CARD.map.backgroundImage}
-          userImage={DESCRIPTION_CARD.map.userImage}
+          userImage={searchParams.image}
           isShowingLevelProgress={false}
         />
       </LeftPanel>
