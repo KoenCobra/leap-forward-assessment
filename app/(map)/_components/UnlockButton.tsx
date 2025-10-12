@@ -15,7 +15,7 @@ const UnlockButton = () => {
       {buttonPositions.map((position, index) => (
         <button
           key={index}
-          className="absolute bg-primary-blue-dark rounded-full grid place-items-center p-5 cursor-pointer"
+          className="absolute bg-primary-blue-dark rounded-full grid place-items-center size-20 cursor-pointer"
           style={{
             top: `${position.top}%`,
             left: `${position.left}%`,
