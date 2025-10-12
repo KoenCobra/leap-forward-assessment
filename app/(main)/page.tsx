@@ -21,13 +21,13 @@ export default function Home() {
       tl.fromTo(
         headingRef.current,
         {
-          opacity: 0,
+          autoAlpha: 0,
           scale: 0.9,
           letterSpacing: "0.5em",
           y: -20,
         },
         {
-          opacity: 1,
+          autoAlpha: 1,
           scale: 1,
           letterSpacing: "0em",
           y: 0,
@@ -41,11 +41,11 @@ export default function Home() {
         tl.fromTo(
           paragraphs,
           {
-            opacity: 0,
+            autoAlpha: 0,
             y: 20,
           },
           {
-            opacity: 1,
+            autoAlpha: 1,
             y: 0,
             duration: 0.8,
             stagger: 0.2,
@@ -59,11 +59,11 @@ export default function Home() {
         levelCards,
         {
           x: 30,
-          opacity: 0,
+          autoAlpha: 0,
         },
         {
           x: 0,
-          opacity: 1,
+          autoAlpha: 1,
           duration: 1,
           stagger: 0.3,
           ease: "power1",

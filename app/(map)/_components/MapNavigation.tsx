@@ -23,10 +23,10 @@ const MapNavigation = () => {
 
     gsap.fromTo(
       buttons,
-      { scale: 0.2, opacity: 0 },
+      { scale: 0.2, autoAlpha: 0 },
       {
         scale: 1,
-        opacity: 1,
+        autoAlpha: 1,
         duration: 0.5,
         stagger: 0.06,
         delay: 0,
@@ -38,9 +38,11 @@ const MapNavigation = () => {
       levelProgressRef.current,
       {
         y: -30,
+        autoAlpha: 0,
       },
       {
         y: 0,
+        autoAlpha: 1,
         duration: 0.5,
         ease: "power1",
       }

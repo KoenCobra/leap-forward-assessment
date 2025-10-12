@@ -54,6 +54,8 @@ const LevelCard = ({
           alt="profile"
           width={100}
           height={100}
+          priority
+          loading="eager"
           className="
               group-hover:scale-105 group-hover:translate-y-[-5px]
               transition-all duration-300"

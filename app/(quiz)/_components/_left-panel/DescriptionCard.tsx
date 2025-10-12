@@ -65,6 +65,8 @@ const DescriptionCard = ({
           alt={title}
           width={135}
           height={135}
+          priority
+          loading="eager"
           className="
             w-[clamp(100px,15vh,135px)] h-[clamp(100px,15vh,135px)]
             border-4 border-primary-white bg-primary-white rounded-full

@@ -73,23 +73,30 @@ export const useGSAPChildrenAnimation = (
  */
 export const ANIMATION_PRESETS = {
   fadeSlideUp: (duration = 0.6, delay = 0): AnimationConfig => ({
-    from: { y: 20, opacity: 0 },
-    to: { y: 0, opacity: 1, duration, delay, ease: "power2.out" },
+    from: { y: 20, autoAlpha: 0 },
+    to: { y: 0, autoAlpha: 1, duration, delay, ease: "power2.out" },
   }),
   fadeSlideDown: (duration = 0.8, delay = 0): AnimationConfig => ({
-    from: { y: 50, opacity: 0 },
-    to: { y: 0, opacity: 1, duration, delay, ease: "power3.out" },
+    from: { y: 50, autoAlpha: 0 },
+    to: { y: 0, autoAlpha: 1, duration, delay, ease: "power3.out" },
   }),
   scaleIn: (duration = 0.6, delay = 0): AnimationConfig => ({
-    from: { scale: 0.8, y: -20, opacity: 0 },
-    to: { scale: 1, y: 0, opacity: 1, duration, delay, ease: "back.out(1.7)" },
-  }),
-  bounceIn: (duration = 0.4, delay = 0, stagger = 0): AnimationConfig => ({
-    from: { scale: 0.9, y: 30, opacity: 0 },
+    from: { scale: 0.8, y: -20, autoAlpha: 0 },
     to: {
       scale: 1,
       y: 0,
-      opacity: 1,
+      autoAlpha: 1,
+      duration,
+      delay,
+      ease: "back.out(1.7)",
+    },
+  }),
+  bounceIn: (duration = 0.4, delay = 0, stagger = 0): AnimationConfig => ({
+    from: { scale: 0.9, y: 30, autoAlpha: 0 },
+    to: {
+      scale: 1,
+      y: 0,
+      autoAlpha: 1,
       duration,
       delay,
       stagger,
@@ -97,8 +104,15 @@ export const ANIMATION_PRESETS = {
     },
   }),
   rotateScaleIn: (duration = 0.8, delay = 0): AnimationConfig => ({
-    from: { scale: 0, rotation: -180 },
-    to: { scale: 1, rotation: 0, duration, delay, ease: "back.out(1.7)" },
+    from: { scale: 0, rotation: -180, autoAlpha: 0 },
+    to: {
+      scale: 1,
+      rotation: 0,
+      autoAlpha: 1,
+      duration,
+      delay,
+      ease: "back.out(1.7)",
+    },
   }),
 };
 
@@ -111,26 +125,26 @@ export const CHILDREN_ANIMATION_PRESETS = {
     stagger = 0.2,
     delay = 0
   ): AnimationConfig => ({
-    from: { y: 50, opacity: 0 },
-    to: { y: 0, opacity: 1, duration, stagger, delay, ease: "power3.out" },
+    from: { y: 50, autoAlpha: 0 },
+    to: { y: 0, autoAlpha: 1, duration, stagger, delay, ease: "power3.out" },
   }),
   fadeSlideDownStagger: (
     duration = 0.6,
     stagger = 0.1,
     delay = 0
   ): AnimationConfig => ({
-    from: { y: -20, opacity: 0 },
-    to: { y: 0, opacity: 1, duration, stagger, delay, ease: "power2.out" },
+    from: { y: -20, autoAlpha: 0 },
+    to: { y: 0, autoAlpha: 1, duration, stagger, delay, ease: "power2.out" },
   }),
   scaleInStagger: (
     duration = 0.5,
     stagger = 0.1,
     delay = 0
   ): AnimationConfig => ({
-    from: { scale: 0.8, opacity: 0, y: 20 },
+    from: { scale: 0.8, autoAlpha: 0, y: 20 },
     to: {
       scale: 1,
-      opacity: 1,
+      autoAlpha: 1,
       y: 0,
       duration,
       stagger,
@@ -143,11 +157,11 @@ export const CHILDREN_ANIMATION_PRESETS = {
     stagger = 0.08,
     delay = 0
   ): AnimationConfig => ({
-    from: { scale: 0.9, y: 30, opacity: 0 },
+    from: { scale: 0.9, y: 30, autoAlpha: 0 },
     to: {
       scale: 1,
       y: 0,
-      opacity: 1,
+      autoAlpha: 1,
       duration,
       stagger,
       delay,
