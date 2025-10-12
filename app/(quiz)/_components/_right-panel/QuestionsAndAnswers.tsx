@@ -133,11 +133,14 @@ const QuestionsAndAnswers = () => {
   return (
     <div
       ref={panelRef}
-      className="bg-primary-blue-darkest h-full rounded-2xl pt-2 px-12 pb-15.5"
+      className="bg-primary-blue-darkest h-full rounded-2xl pt-2 px-12 pb-15.5 invisible"
     >
       <QuestionTimer />
 
-      <h2 ref={questionRef} className="font-bold text-center text-2xl mt-4.5">
+      <h2
+        ref={questionRef}
+        className="font-bold text-center text-2xl mt-4.5 invisible"
+      >
         {currentQuestion?.question}
       </h2>
 
@@ -145,7 +148,7 @@ const QuestionsAndAnswers = () => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <div ref={buttonsRef} className="w-3/5 mx-auto mt-7.5">
+          <div ref={buttonsRef} className="w-3/5 mx-auto mt-7.5 invisible">
             <ButtonElevated
               isDisabled={!canSubmit}
               text={isAnswerReady ? "Doorgaan!" : "Klaar!"}
@@ -163,7 +166,7 @@ const QuestionsAndAnswers = () => {
       </Tooltip>
 
       {!isAnswerReady && (
-        <div ref={tipButtonRef}>
+        <div ref={tipButtonRef} className="invisible">
           <ButtonElevated
             text="Geef me een tip..."
             addedButtonClasses="mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto hover:bg-grey-light transition-all duration-300"

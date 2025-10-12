@@ -52,7 +52,10 @@ const DescriptionCard = ({
           backgroundImage: `url('/images/${backgroundImage}')`,
         }}
       >
-        <div ref={headerRef} className="flex items-center gap-2">
+        <div
+          ref={headerRef}
+          className="flex items-center gap-2 [&>*]:invisible"
+        >
           <GlobalQuizTimer />
           {isShowingLevelProgress && (
             <LevelProgress level={2} totalLevels={8} />
@@ -71,6 +74,7 @@ const DescriptionCard = ({
             w-[clamp(100px,15vh,135px)] h-[clamp(100px,15vh,135px)]
             border-4 border-primary-white bg-primary-white rounded-full
             absolute bottom-[-10%] left-1/2 -translate-x-1/2 shadow-2xl
+            invisible
           "
         />
       </div>
@@ -82,7 +86,7 @@ const DescriptionCard = ({
             text-2xl font-bold text-primary-blue-dark
             mt-8 pb-3.5
             border-b-2 border-blue-medium
-            w-fit mx-auto"
+            w-fit mx-auto invisible"
         >
           {title}
         </h2>
@@ -91,6 +95,7 @@ const DescriptionCard = ({
           className="
             text-primary-blue-dark font-light leading-5.5
             mt-4 text-balance max-w-2xl mx-auto pb-6 whitespace-pre-line
+            invisible
           "
         >
           {description}

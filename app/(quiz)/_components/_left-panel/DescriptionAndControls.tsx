@@ -24,7 +24,7 @@ const DescriptionAndQuizControls = () => {
   });
 
   return (
-    <div ref={containerRef} className="contents">
+    <div ref={containerRef} className="contents [&>*]:invisible">
       <DescriptionCard
         title={DESCRIPTION_CARD.printingHouse.title}
         description={DESCRIPTION_CARD.printingHouse.description}

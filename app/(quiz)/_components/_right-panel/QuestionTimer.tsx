@@ -30,7 +30,7 @@ const QuestionTimer = () => {
     <div
       ref={timerContainerRef}
       className={cn(
-        "px-4 py-2 flex items-center gap-2 bg-primary-white rounded-4xl w-fit mx-auto",
+        "px-4 py-2 flex items-center gap-2 bg-primary-white rounded-4xl w-fit mx-auto invisible",
         isLowTime
           ? "text-error-red animate-scale-pulse"
           : "text-primary-blue-dark"

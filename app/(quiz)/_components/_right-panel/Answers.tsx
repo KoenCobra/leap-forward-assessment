@@ -103,7 +103,7 @@ const Answers = () => {
   return (
     <div
       ref={answersContainerRef}
-      className="grid lg:grid-cols-2 gap-6 mt-8 w-full"
+      className="grid lg:grid-cols-2 gap-6 mt-8 w-full [&>*]:invisible"
       role="group"
       aria-label="Answer options"
     >

@@ -28,7 +28,8 @@ const QuizControls = () => {
         grid grid-cols-3 gap-2  
         md:grid-cols-[auto_auto_auto_1fr] 
         xl:grid-cols-3
-        2xl:md:grid-cols-[auto_auto_auto_1fr]"
+        2xl:md:grid-cols-[auto_auto_auto_1fr]
+        [&>*]:invisible"
     >
       <div className="col-span-1 xl:col-span-1">
         <ButtonElevated icon={faQuestion} />
