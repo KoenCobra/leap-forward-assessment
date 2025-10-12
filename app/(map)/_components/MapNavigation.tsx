@@ -52,6 +52,7 @@ const MapNavigation = () => {
       <div ref={levelProgressRef} className="w-1/2 lg:w-1/3 xl:w-1/5">
         <LevelProgress level={0} totalLevels={6} />
       </div>
+
       <div ref={buttonsRef}>
         {buttonPositions.map((position, index) => (
           <UnlockButton key={index} position={position} />
