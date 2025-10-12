@@ -59,10 +59,9 @@ export const useGSAPChildrenAnimation = (
       const children = containerRef.current?.children;
       if (!children) return;
 
-      // Execute onStart callback if provided
       config.onStart?.();
-
       gsap.fromTo(children, config.from, config.to);
+      config.onComplete?.();
     },
     { scope: containerRef, dependencies }
   );
