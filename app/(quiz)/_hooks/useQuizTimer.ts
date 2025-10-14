@@ -11,7 +11,7 @@ export const useQuizTimer = (timeLimit: number) => {
     setIsAnswerReady,
     hasAllAnswerCorrect,
   } = useQuizContext();
-  const { playCorrect, playError, playWarning } = useQuizSounds();
+  const { playWarning, playCorrect, playError } = useQuizSounds();
 
   // Initialize timer when question changes
   useEffect(() => {
@@ -37,16 +37,16 @@ export const useQuizTimer = (timeLimit: number) => {
     return () => clearInterval(countdown);
   }, [setTime, setIsAnswerReady, isAnswerReady]);
 
-  // Play sound when timer expires
+  // Play sound when answer is revealed (either by user clicking or timer expiring)
   useEffect(() => {
-    if (isAnswerReady && time === 0) {
+    if (isAnswerReady) {
       if (hasAllAnswerCorrect) {
         playCorrect();
       } else {
         playError();
       }
     }
-  }, [isAnswerReady, time, hasAllAnswerCorrect, playCorrect, playError]);
+  }, [isAnswerReady, hasAllAnswerCorrect, playCorrect, playError]);
 
   // Play warning sound when time is running low
   useEffect(() => {

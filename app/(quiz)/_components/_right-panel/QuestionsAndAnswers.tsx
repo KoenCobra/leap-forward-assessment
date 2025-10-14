@@ -8,14 +8,13 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useRef } from "react";
 import {
   ANIMATION_PRESETS,
   useGSAPAnimation,
 } from "../../_hooks/useGSAPAnimation";
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
-import { useQuizSounds } from "../../_hooks/useQuizSounds";
 import { useVoiceHint } from "../../_hooks/useVoiceHint";
 import { ANIMATION_DELAYS } from "../../constants";
 import Answers from "./Answers";
@@ -36,17 +35,15 @@ const QuestionsAndAnswers = () => {
     setCurrentQuestionIndex,
     setIsAnswerReady,
     setSelectedAnswers,
-    hasAllAnswerCorrect,
+    setTime,
   } = useQuizContext();
   const { questions, isLoadingQuestions, errorQuestions } = useQuestions();
   const router = useRouter();
-  const { playCorrect, playError } = useQuizSounds();
 
   const currentQuestion = questions?.[currentQuestionIndex];
-  const isLastQuestion = useMemo(
-    () => questions && currentQuestionIndex === questions.length - 1,
-    [questions, currentQuestionIndex]
-  );
+  const isLastQuestion =
+    questions && currentQuestionIndex === questions.length - 1;
+
   const canSubmit = isAnswerReady || hasSelectedAnswers;
   const showTooltip = !canSubmit;
 
@@ -79,13 +76,8 @@ const QuestionsAndAnswers = () => {
 
   const handleCheckQuestion = useCallback(() => {
     setIsAnswerReady(true);
-
-    if (hasAllAnswerCorrect) {
-      playCorrect();
-    } else {
-      playError();
-    }
-  }, [setIsAnswerReady, hasAllAnswerCorrect, playCorrect, playError]);
+    setTime(0);
+  }, [setIsAnswerReady, setTime]);
 
   const handleNextQuestion = useCallback(() => {
     if (isLastQuestion) {
