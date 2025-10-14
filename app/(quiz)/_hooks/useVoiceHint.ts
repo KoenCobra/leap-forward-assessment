@@ -23,17 +23,10 @@ export const useVoiceHint = (
           audioRef.current = null;
         }
 
-        const audioBlob = new Blob(
-          [Uint8Array.from(atob(result.audioBase64), (c) => c.charCodeAt(0))],
-          { type: "audio/mp3" }
-        );
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        const audio = new Audio(audioUrl);
+        const audio = new Audio(`data:audio/mp3;base64,${result.audioBase64}`);
         audioRef.current = audio;
 
         audio.onended = () => {
-          URL.revokeObjectURL(audioUrl);
           audioRef.current = null;
         };
 
