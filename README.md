@@ -75,7 +75,8 @@ Although not originally required, this app includes an **AI-powered voice hint f
 - The hint is converted to speech using OpenAI's TTS (Text-to-Speech)
 - A voice will play the hint in Dutch to help you answer the question
 - The audio automatically stops when you move to the next question
-- //TODO: cancel AI generation when moving to next question
+
+> **⚠️ Developer Note:** This AI feature is completely unnecessary and overengineered for this use case. It should never be used in a production quiz app like this (static hints would be far more practical and cost-effective). This feature was added purely to demonstrate proficiency in working with LLMs, API integration, and modern AI technologies. Consider it a technical showcase rather than a best practice implementation.
 
 ## 🎨 Key Features
 
