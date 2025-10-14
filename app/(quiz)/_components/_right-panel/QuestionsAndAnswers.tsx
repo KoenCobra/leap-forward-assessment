@@ -16,6 +16,7 @@ import {
 import { useQuestions } from "../../_hooks/useQuestions";
 import useQuizContext from "../../_hooks/useQuizContext";
 import { useQuizSounds } from "../../_hooks/useQuizSounds";
+import { useVoiceHint } from "../../_hooks/useVoiceHint";
 import { ANIMATION_DELAYS } from "../../constants";
 import Answers from "./Answers";
 import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
@@ -23,13 +24,11 @@ import QuestionTimer from "./QuestionTimer";
 import QuestionsErrorState from "./QuestionsErrorState";
 
 const QuestionsAndAnswers = () => {
-  // Refs for animations
   const panelRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLHeadingElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const tipButtonRef = useRef<HTMLDivElement>(null);
 
-  // Context and hooks
   const {
     hasSelectedAnswers,
     isAnswerReady,
@@ -43,7 +42,6 @@ const QuestionsAndAnswers = () => {
   const router = useRouter();
   const { playCorrect, playError } = useQuizSounds();
 
-  // Computed values
   const currentQuestion = questions?.[currentQuestionIndex];
   const isLastQuestion = useMemo(
     () => questions && currentQuestionIndex === questions.length - 1,
@@ -52,7 +50,11 @@ const QuestionsAndAnswers = () => {
   const canSubmit = isAnswerReady || hasSelectedAnswers;
   const showTooltip = !canSubmit;
 
-  // Animation configurations
+  const { handleGetHint, isLoadingHint } = useVoiceHint(
+    currentQuestion,
+    currentQuestionIndex
+  );
+
   useGSAPAnimation(panelRef, ANIMATION_PRESETS.fadeSlideDown(), [
     isLoadingQuestions,
   ]);
@@ -168,9 +170,13 @@ const QuestionsAndAnswers = () => {
       {!isAnswerReady && (
         <div ref={tipButtonRef} className="invisible">
           <ButtonElevated
-            text="Geef me een tip..."
+            text={
+              isLoadingHint ? "Hint wordt gegenereerd..." : "Geef me een tip..."
+            }
             addedButtonClasses="mt-4 bg-primary-white text-primary-blue-dark w-3/5 mx-auto hover:bg-grey-light transition-all duration-300"
             afterColor="after:bg-grey-light"
+            isDisabled={isLoadingHint}
+            onClick={handleGetHint}
           />
         </div>
       )}
