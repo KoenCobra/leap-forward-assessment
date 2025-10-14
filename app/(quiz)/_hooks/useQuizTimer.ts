@@ -3,12 +3,6 @@ import { LOW_TIME_THRESHOLD } from "../constants";
 import useQuizContext from "./useQuizContext";
 import { useQuizSounds } from "./useQuizSounds";
 
-/**
- * Custom hook for managing quiz timer logic
- * Handles countdown, auto-submission on timeout, and sound effects
- *
- * @param timeLimit - Time limit for current question in seconds
- */
 export const useQuizTimer = (timeLimit: number) => {
   const {
     time,

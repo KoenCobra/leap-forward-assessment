@@ -2,30 +2,16 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { RefObject } from "react";
 
-/**
- * Animation configuration for GSAP animations
- */
 interface AnimationConfig {
   from: gsap.TweenVars;
   to: gsap.TweenVars;
 }
 
-/**
- * Extended animation configuration with callback support
- */
 interface AnimationConfigWithCallbacks extends AnimationConfig {
   onComplete?: () => void;
   onStart?: () => void;
 }
 
-/**
- * Custom hook for GSAP animations with consistent patterns
- * Reduces boilerplate and ensures consistent animation behavior
- *
- * @param elementRef - Reference to the element to animate
- * @param config - Animation configuration (from and to states)
- * @param dependencies - Dependencies array to trigger re-animation
- */
 export const useGSAPAnimation = (
   elementRef: RefObject<HTMLElement | null>,
   config: AnimationConfig,
@@ -41,14 +27,6 @@ export const useGSAPAnimation = (
   );
 };
 
-/**
- * Custom hook for animating children of a container element
- * Useful for staggered animations of multiple elements
- *
- * @param containerRef - Reference to the container element
- * @param config - Animation configuration with optional callbacks
- * @param dependencies - Dependencies array to trigger re-animation
- */
 export const useGSAPChildrenAnimation = (
   containerRef: RefObject<HTMLElement | null>,
   config: AnimationConfigWithCallbacks,
