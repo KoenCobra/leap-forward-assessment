@@ -78,6 +78,8 @@ Although not originally required, this app includes an **AI-powered voice hint f
 - A voice will play the hint in Dutch to help you answer the question
 - The audio automatically stops when you move to the next question
 
+(\*\* Not completely finished yet)
+
 ## 🎨 Key Features
 
 - ✨ Smooth GSAP animations throughout the app
