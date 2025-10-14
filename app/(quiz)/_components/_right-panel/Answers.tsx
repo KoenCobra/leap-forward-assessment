@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import {
   CHILDREN_ANIMATION_PRESETS,
   useGSAPChildrenAnimation,
@@ -36,18 +36,18 @@ const Answers = () => {
     [currentQuestionIndex]
   );
 
-  const handleButtonHover = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>, entering: boolean) => {
-      if (isAnswerReady) return;
+  const handleButtonHover = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    entering: boolean
+  ) => {
+    if (isAnswerReady) return;
 
-      gsap.to(e.currentTarget, {
-        scale: entering ? 1.02 : 1,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    },
-    [isAnswerReady]
-  );
+    gsap.to(e.currentTarget, {
+      scale: entering ? 1.02 : 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
 
   /*
    * Determines CSS classes for answer button based on its state
@@ -56,49 +56,43 @@ const Answers = () => {
    * - Correct (after reveal): white background with green outline
    * - Incorrect (after reveal): white background with red outline
    */
-  const getAnswerClasses = useCallback(
-    (answer: Answer) => {
-      const selected = isAnswerSelected(answer, selectedAnswers);
+  const getAnswerClasses = (answer: Answer) => {
+    const selected = isAnswerSelected(answer, selectedAnswers);
 
-      return cn(
-        "w-full rounded-lg px-8 py-4 font-bold text-xl",
-        "bg-secondary-blue-light text-primary-blue-dark",
+    return cn(
+      "w-full rounded-lg px-8 py-4 font-bold text-xl",
+      "bg-secondary-blue-light text-primary-blue-dark",
 
-        // Selected state (before answer is revealed)
-        selected &&
-          !isAnswerReady && [
-            "bg-blue-medium text-primary-white",
-            "outline-2 outline-secondary-yellow",
-          ],
-
-        // Revealed state (after answer is revealed)
-        isAnswerReady && [
-          "cursor-default",
-          selected &&
-            answer.correct &&
-            "bg-primary-white outline-[3px] outline-success-green",
-          selected &&
-            !answer.correct &&
-            "bg-primary-white outline-[3px] outline-error-red",
+      // Selected state (before answer is revealed)
+      selected &&
+        !isAnswerReady && [
+          "bg-blue-medium text-primary-white",
+          "outline-2 outline-secondary-yellow",
         ],
 
-        !isAnswerReady && "cursor-pointer"
-      );
-    },
-    [selectedAnswers, isAnswerReady]
-  );
+      // Revealed state (after answer is revealed)
+      isAnswerReady && [
+        "cursor-default",
+        selected &&
+          answer.correct &&
+          "bg-primary-white outline-[3px] outline-success-green",
+        selected &&
+          !answer.correct &&
+          "bg-primary-white outline-[3px] outline-error-red",
+      ],
 
-  const toggleAnswer = useCallback(
-    (answer: Answer) => {
-      playClick();
-      setSelectedAnswers(
-        isAnswerSelected(answer, selectedAnswers)
-          ? selectedAnswers.filter((a) => a !== answer)
-          : [...selectedAnswers, answer]
-      );
-    },
-    [playClick, selectedAnswers, setSelectedAnswers]
-  );
+      !isAnswerReady && "cursor-pointer"
+    );
+  };
+
+  const toggleAnswer = (answer: Answer) => {
+    playClick();
+    setSelectedAnswers(
+      isAnswerSelected(answer, selectedAnswers)
+        ? selectedAnswers.filter((a) => a !== answer)
+        : [...selectedAnswers, answer]
+    );
+  };
 
   return (
     <div

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import {
   ANIMATION_PRESETS,
   useGSAPAnimation,
@@ -74,12 +74,12 @@ const QuestionsAndAnswers = () => {
     [currentQuestionIndex, isAnswerReady]
   );
 
-  const handleCheckQuestion = useCallback(() => {
+  const handleCheckQuestion = () => {
     setIsAnswerReady(true);
     setTime(0);
-  }, [setIsAnswerReady, setTime]);
+  };
 
-  const handleNextQuestion = useCallback(() => {
+  const handleNextQuestion = () => {
     if (isLastQuestion) {
       router.push("/");
       return;
@@ -88,33 +88,23 @@ const QuestionsAndAnswers = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setIsAnswerReady(false);
     setSelectedAnswers([]);
-  }, [
-    isLastQuestion,
-    currentQuestionIndex,
-    setCurrentQuestionIndex,
-    setIsAnswerReady,
-    setSelectedAnswers,
-    router,
-  ]);
+  };
 
-  const handleButtonClick = useCallback(() => {
+  const handleButtonClick = () => {
     if (isAnswerReady) {
       handleNextQuestion();
     } else {
       handleCheckQuestion();
     }
-  }, [isAnswerReady, handleNextQuestion, handleCheckQuestion]);
+  };
 
-  const getButtonClasses = useCallback(
-    () =>
-      cn(
-        "bg-grey-light text-primary-blue-dark",
-        canSubmit
-          ? "bg-secondary-yellow after:bg-yellow-darkest"
-          : "cursor-default"
-      ),
-    [canSubmit]
-  );
+  const getButtonClasses = () =>
+    cn(
+      "bg-grey-light text-primary-blue-dark",
+      canSubmit
+        ? "bg-secondary-yellow after:bg-yellow-darkest"
+        : "cursor-default"
+    );
 
   if (isLoadingQuestions) {
     return <QuestionLoadingSkeleton />;
