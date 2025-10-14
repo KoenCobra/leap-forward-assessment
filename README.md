@@ -84,7 +84,7 @@ Although not originally required, this app includes an **AI-powered voice hint f
 - 🔊 Interactive sound effects for user actions
 - ⏱️ Real-time countdown timers with visual warnings
 - 🎯 Answer validation with visual feedback
-- 📱 Responsive design for all screen sizes
+- 📱 100% mobile responsive design - works seamlessly on all devices and screen sizes
 - 🌐 Server-side data prefetching for instant page loads
 - 🎤 AI-generated voice hints in Dutch
 - ♿ Accessible UI components
