@@ -42,6 +42,12 @@ export const useVoiceHint = (
   }, [currentQuestion, isLoadingHint]);
 
   useEffect(() => {
+    // Stop any playing audio immediately when question changes
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
