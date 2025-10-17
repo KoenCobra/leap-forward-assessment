@@ -132,7 +132,7 @@ const QuestionsAndAnswers = () => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <div ref={buttonsRef} className="w-3/5 mx-auto mt-7.5 invisible">
+          <div ref={buttonsRef} className="w-3/5 mx-auto mt-7.5">
             <ButtonElevated
               isDisabled={!canSubmit}
               text={isAnswerReady ? "Doorgaan!" : "Klaar!"}
@@ -150,7 +150,7 @@ const QuestionsAndAnswers = () => {
       </Tooltip>
 
       {!isAnswerReady && (
-        <div ref={tipButtonRef} className="invisible">
+        <div ref={tipButtonRef}>
           <ButtonElevated
             text={
               isLoadingHint ? "Hint wordt gegenereerd..." : "Geef me een tip..."

@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuestions } from "@/app/(quiz)/_hooks/useQuestions";
 import LevelProgress from "@/components/LevelProgress";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -17,6 +18,9 @@ const buttonPositions = [
 const MapNavigation = () => {
   const buttonsRef = useRef<HTMLDivElement>(null);
   const levelProgressRef = useRef<HTMLDivElement>(null);
+
+  useQuestions();
+
   useGSAP(() => {
     const buttons = buttonsRef.current?.children;
     if (!buttons) return;

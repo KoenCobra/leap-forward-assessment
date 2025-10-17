@@ -10,6 +10,7 @@ export const useQuizTimer = (timeLimit: number) => {
     isAnswerReady,
     setIsAnswerReady,
     hasAllAnswerCorrect,
+    currentQuestionIndex,
   } = useQuizContext();
   const { playWarning, playCorrect, playError } = useQuizSounds();
 
@@ -18,7 +19,7 @@ export const useQuizTimer = (timeLimit: number) => {
     if (timeLimit) {
       setTime(timeLimit);
     }
-  }, [timeLimit, setTime]);
+  }, [timeLimit, setTime, currentQuestionIndex]);
 
   // Countdown timer logic
   useEffect(() => {

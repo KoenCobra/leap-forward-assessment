@@ -73,7 +73,7 @@ export default function Home() {
     { scope: levelCardsContainerRef, dependencies: [] }
   );
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-main bg-cover bg-center">
+    <main className="flex flex-col items-center text-primary-white justify-center min-h-screen p-4 bg-main bg-cover bg-center">
       <div className="text-center">
         <h1 ref={headingRef} className="font-bold text-7xl invisible">
           Kies je niveau!
