@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-
+import { ClerkProvider } from "@clerk/nextjs";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { ConvexClientProvider } from "./ConvexClientProvider";
+import "./globals.css";
 import ReactQueryProvider from "./ReactQueryProvider";
 config.autoAddCss = false;
 
@@ -23,14 +24,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      suppressHydrationWarning
-      lang="en"
-      className={`${flandersArtSans.variable} antialiased`}
-    >
-      <body>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html
+        suppressHydrationWarning
+        lang="en"
+        className={`${flandersArtSans.variable} antialiased`}
+      >
+        <body>
+          <ReactQueryProvider>
+            <ConvexClientProvider>{children}</ConvexClientProvider>
+          </ReactQueryProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
