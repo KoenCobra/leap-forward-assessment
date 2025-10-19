@@ -1,6 +1,13 @@
+import { auth } from "@clerk/nextjs/server";
 import React from "react";
 
-const AdminLayout = ({ children }: { children: React.ReactNode }) => {
+const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
   return <div className="container mx-auto mt-4 px-8">{children}</div>;
 };
 
